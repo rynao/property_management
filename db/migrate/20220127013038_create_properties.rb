@@ -6,9 +6,9 @@ class CreateProperties < ActiveRecord::Migration[6.0]
       t.string     :city,            null: false
       t.string     :address_line
       t.string     :building,        null: false
-      t.integer     :total_units
-      t.date       :building_year,   null: false
-      t.string     :property_type,   null: false    #物件種別
+      t.integer    :total_units
+      t.date       :building_year
+      t.string     :property_type                   #物件種別
       t.string     :business_entity, null: false    #法人 or 個人
       t.timestamps
     end

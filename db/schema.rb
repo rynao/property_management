@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2022_01_27_013038) do
     t.string "address_line"
     t.string "building", null: false
     t.integer "total_units"
-    t.date "building_year", null: false
-    t.string "property_type", null: false
+    t.date "building_year"
+    t.string "property_type"
     t.string "business_entity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
