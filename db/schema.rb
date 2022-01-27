@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_024644) do
+ActiveRecord::Schema.define(version: 2022_01_27_033609) do
+
+  create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "rent", null: false
+    t.bigint "property_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_contracts_on_property_id"
+    t.index ["room_id"], name: "index_contracts_on_room_id"
+  end
 
   create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code"
@@ -34,5 +46,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_024644) do
     t.index ["property_id"], name: "index_rooms_on_property_id"
   end
 
+  add_foreign_key "contracts", "properties"
+  add_foreign_key "contracts", "rooms"
   add_foreign_key "rooms", "properties"
 end
