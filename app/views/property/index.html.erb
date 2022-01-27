@@ -1,3 +1,6 @@
+<%= render 'layouts/header' %>
+
+<div class='container'>
 <%=link_to '物件登録', new_property_path %>
 
 <% @property.each do |property| %>
@@ -5,3 +8,4 @@
 <%= link_to property.building, property_path(property.id) %>
 </div>
 <% end %>
+</div>
