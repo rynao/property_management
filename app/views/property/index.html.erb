@@ -1,3 +1,5 @@
 <% @property.each do |property| %>
-<%= property.building %>
+<div>
+<%= link_to property.building, property_path(property.id) %>
+</div>
 <% end %>
