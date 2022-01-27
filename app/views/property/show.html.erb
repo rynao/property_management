@@ -1,6 +1,42 @@
-<%= @property.building %>
-<% @property.rooms.each do |room| %>
-<div>
-<%= link_to room.room_name, property_path(room.id) %>
+<div class='container mt-5'>
+  <h3>
+    <%= @property.building %>
+  </h3>
+  <div class='mb-3'>
+    〒<%= @property.postal_code %>
+    <%= @property.prefecture %>
+    <%= @property.city %>
+    <%= @property.address_line %>
+  </div>
+  <div class='mb-3'>
+    総戸数：<%= @property.total_units %>戸
+  </div>
+  <div class='mb-3'>
+    <% if @property.building_year.nil? %>
+        築年月：
+    <% else %>
+      築年月：<%= @property.building_year.strftime("%Y年%m月") %>
+    <% end %>
+  </div>
+  <div class='mb-3'>
+    物件種別：<%= @property.property_type %>
+  </div>
+  <div class='mb-3'>
+    事業主体：<%= @property.business_entity %>
+  </div>
+  <div>
+    <%=link_to '編集', edit_property_path %>
+    <%=link_to '削除', property_path, method: :delete %>
+    <%=link_to '戻る', property_index_path %>
+  </div>
+  <div class='mt-5'>
+    <h4>
+      部屋一覧
+    </h4>
+    <% @property.rooms.each do |room| %>
+      <div>
+        <%= link_to room.room_name, property_path(room.id) %>
+      </div>
+    <% end %>
+  </div>
 </div>
-<% end %>

@@ -1,3 +1,5 @@
+<%=link_to '物件登録', new_property_path %>
+
 <% @property.each do |property| %>
 <div>
 <%= link_to property.building, property_path(property.id) %>
