@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
   root to: 'property#index'
-  resources :property
+  resources :property do
+    resources :rooms, except: :index
+  end
+  resources :rooms, only: :index
+
 end

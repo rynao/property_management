@@ -28,16 +28,17 @@
   </div>
   <div>
     <%=link_to '編集', edit_property_path %>
-    <%=link_to '削除', property_path, method: :delete %>
+    <%=link_to '削除', property_path, method: :delete, data: {confirm: "物件に紐付く部屋および契約情報も全て削除されます。削除しますか？"} %>
     <%=link_to '戻る', property_index_path %>
   </div>
   <div class='mt-5'>
     <h4>
       部屋一覧
     </h4>
+    <%=link_to '部屋登録', new_property_room_path(@property.id) %>
     <% @property.rooms.each do |room| %>
       <div>
-        <%= link_to room.room_name, property_path(room.id) %>
+        <%= link_to room.room_name, property_room_path(@property.id, room.id) %>
       </div>
     <% end %>
   </div>

@@ -30,7 +30,7 @@
     </div>
     <div class='col-md-1 mb-3'>
       <label class='form-label'>築年月</label>
-      <%= f.date_select :building_year, {discard_day: true}, class:'form-control', placeholder:'' %>
+      <%= f.date_select :building_year, {discard_day: true, start_year:1950}, class:'form-control', placeholder:'' %>
     </div>
     <div class='col-md-2 mb-3'>
       <label class='form-label'>物件種別</label>
@@ -41,7 +41,7 @@
       <%= f.text_field :business_entity, class:'form-control', placeholder:'法人' %>
     </div>
     <div class=''>
-      <%= f.submit "登録する" ,class:'btn btn-primary' %>
+      <%= f.submit "登録" ,class:'btn btn-primary' %>
       <%=link_to 'もどる', root_path, class:'' %>
     </div>
   </div>

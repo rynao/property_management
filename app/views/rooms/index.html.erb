@@ -1,0 +1,11 @@
+<%= render 'layouts/header' %>
+
+<div class='container'>
+
+<% @rooms.each do |room| %>
+<div>
+<%= room.property.building %>
+<%= link_to room.room_name, property_room_path(room.property.id, room.id) %>
+</div>
+<% end %>
+</div>
