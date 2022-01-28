@@ -30,7 +30,7 @@
     </div>
     <div class='col-md-1 mb-3'>
       <label class='form-label'>築年月</label>
-      <%= f.date_select :building_year, {discard_day: true}, class:'form-control', placeholder:'' %>
+      <%= f.date_select :building_year, {discard_day: true, start_year:1950}, class:'form-control', placeholder:'' %>
     </div>
     <div class='col-md-2 mb-3'>
       <label class='form-label'>物件種別</label>
