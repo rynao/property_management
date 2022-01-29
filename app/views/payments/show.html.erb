@@ -1,0 +1,25 @@
+<%= render 'layouts/header' %>
+
+<div class='container mt-5'>
+  <h3 class='mb-3'>支払い情報</h3>
+  <div class='mb-3'>
+    物件名称：<%= @payment.property.building %>
+  </div>
+  <div class='mb-3'>
+    部屋番号：<%= @payment.room.room_name %>
+  </div>
+  <div class='mb-3'>
+    支払い月：<%= @payment.paid_date.strftime("%Y年%m月") %>
+  </div>
+  <div class='mb-3'>
+    家賃：<%= @payment.contract.rent %>円
+  </div>
+    <div class='mb-3'>
+    支払い：<%= @payment.paid %>
+  </div>
+  <div>
+    <%=link_to '編集', edit_payment_path %>
+    <%=link_to '削除', payment_path, method: :delete, data: {confirm: "削除しますか？"} %>
+    <%=link_to '戻る', payments_path %>
+  </div>
+</div>

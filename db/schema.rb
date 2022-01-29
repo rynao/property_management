@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_033609) do
+ActiveRecord::Schema.define(version: 2022_01_29_022522) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 2022_01_27_033609) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_contracts_on_property_id"
     t.index ["room_id"], name: "index_contracts_on_room_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "paid_date", null: false
+    t.boolean "paid", default: false, null: false
+    t.bigint "property_id", null: false
+    t.bigint "room_id", null: false
+    t.bigint "contract_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contract_id"], name: "index_payments_on_contract_id"
+    t.index ["property_id"], name: "index_payments_on_property_id"
+    t.index ["room_id"], name: "index_payments_on_room_id"
   end
 
   create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -48,5 +61,8 @@ ActiveRecord::Schema.define(version: 2022_01_27_033609) do
 
   add_foreign_key "contracts", "properties"
   add_foreign_key "contracts", "rooms"
+  add_foreign_key "payments", "contracts"
+  add_foreign_key "payments", "properties"
+  add_foreign_key "payments", "rooms"
   add_foreign_key "rooms", "properties"
 end
