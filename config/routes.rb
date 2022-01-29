@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :rooms, except: :index
   end
   resources :rooms, only: :index
+  resources :contracts
 
 end

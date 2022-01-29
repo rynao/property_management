@@ -1,0 +1,14 @@
+<%= render 'layouts/header' %>
+
+<div class='container'>
+<%=link_to '契約登録', new_contract_path %>
+
+<% @contracts.each do |contract| %>
+<div>
+<%= contract.property.building %>
+<%= contract.room.room_name %>
+<%= link_to '詳細', contract_path(contract.id) %>
+</div>
+<% end %>
+</div>
+

@@ -5,9 +5,6 @@ class RoomsController < ApplicationController
     @rooms = Room.includes(:property)
   end
 
-  def show
-  end
-
   def new
     @property = Property.find(params[:property_id])
     @room = Room.new
@@ -20,6 +17,9 @@ class RoomsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
   end
 
   def edit
