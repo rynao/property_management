@@ -7,4 +7,6 @@ class Property < ApplicationRecord
 
   has_many :rooms, dependent: :destroy
   has_many :contracts, dependent: :destroy
+  has_many :payments, dependent: :destroy
+
 end
