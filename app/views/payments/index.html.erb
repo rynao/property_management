@@ -1,0 +1,17 @@
+<%= render 'layouts/header' %>
+
+<div class='container'>
+<%=link_to '支払い登録', new_payment_path %>
+
+<% @payments.each do |payment| %>
+<div>
+<%= payment.property.building %>
+<%= payment.room.room_name %>
+<%= payment.paid_date %>
+<%= payment.contract.rent %>
+<%= payment.paid %>
+<%= link_to '詳細', payment_path(payment.id) %>
+</div>
+<% end %>
+</div>
+
