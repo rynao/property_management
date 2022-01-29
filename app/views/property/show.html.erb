@@ -42,4 +42,15 @@
       </div>
     <% end %>
   </div>
+  <div class='mt-5'>
+    <h4>
+      契約一覧
+    </h4>
+    <%=link_to '契約登録', new_contract_path %>
+    <% @property.contracts.each do |contract| %>
+      <div>
+        <%= link_to contract.room.room_name, contract_path(contract.id) %>
+      </div>
+    <% end %>
+  </div>
 </div>
