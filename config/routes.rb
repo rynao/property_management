@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   end
   resources :rooms, only: :index
   resources :contracts
+  resources :payments
 
 end
