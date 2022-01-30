@@ -1,14 +1,28 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
+<h3>契約管理</h3>
 <%=link_to '契約登録', new_contract_path %>
-
-<% @contracts.each do |contract| %>
-<div>
-<%= contract.property.building %>
-<%= contract.room.room_name %>
-<%= link_to '詳細', contract_path(contract.id) %>
-</div>
-<% end %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th><%= link_to "物件名称", :sort => "building"%></th>
+        <th><%= link_to "部屋", :sort => "room"%></th>
+        <th><%= link_to "契約開始月", :sort => "paid_date"%></th>
+        <th><%= link_to "契約終了月", :sort => "rent"%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contracts.each do |contract| %>
+        <tr>
+          <td><%= contract.property.building %></td>
+          <td><%= contract.room.room_name %></td>
+          <td><%= contract.start_date.strftime("%Y年%m月") %></td>
+          <td><%= contract.end_date.strftime("%Y年%m月") %></td>
+          <td><%= link_to '詳細', contract_path(contract.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>     
 </div>
 
