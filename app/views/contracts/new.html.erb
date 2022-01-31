@@ -8,7 +8,7 @@
   <div class='row g-3'>
     <div class='col-md-3 mb-3'>
       <label class='form-label'>物件名称</label>
-<div class='form-control'>
+      <div class='form-control'>
         <%= f.collection_select :property_id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'pulldown'} %>
       </div>
     </div>
@@ -42,7 +42,7 @@
   <div class='row g-3'>
     <div class='col-md-3 mb-3'>
       <label class='form-label'>物件名称</label>
-<div class='form-control'>
+      <div class='form-control'>
         <%= f.collection_select :property_id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'pulldown'} %>
         <%= Property.all.each do |property| %>
         <%# <% template{id: "room-of-property#{property.id}"} %> %>

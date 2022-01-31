@@ -5,6 +5,7 @@ class Property < ApplicationRecord
   validates :business_entity, presence: true
   validates :total_units, numericality: true
 
+  belongs_to :user
   has_many :rooms, dependent: :destroy
   has_many :contracts, dependent: :destroy
   has_many :payments, dependent: :destroy
