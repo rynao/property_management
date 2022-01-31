@@ -2,7 +2,18 @@ class PaymentsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @payments = Payment.includes(:property, :room, :contract)
+    sql= "
+      SELECT pr.building, pa.paid_date, SUM(rent) AS sumrent
+      FROM payments pa
+      LEFT OUTER JOIN rooms r ON pa.room_id = r.id
+      JOIN properties pr ON pa.property_id = pr.id
+      JOIN contracts c ON pa.contract_id = c.id
+      GROUP BY paid_date, pr.id 
+      ORDER BY pr.id, paid_date"
+    smr = ActiveRecord::Base.connection.select_all(sql)
+    @summary = smr.to_a
+
+    @chart = Payment.joins(:property).joins(:contract).group('building').group('paid_date').sum('contracts.rent')
   end
 
   def new

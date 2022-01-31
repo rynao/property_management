@@ -1,11 +1,22 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-
-<% @rooms.each do |room| %>
-<div>
-<%= room.property.building %>
-<%= link_to room.room_name, property_room_path(room.property.id, room.id) %>
-</div>
-<% end %>
+<h4 class='py-3'>部屋一覧</h4>
+  <table class='table mt-3'>
+    <thead>
+      <tr>
+        <th>物件名称</th>
+        <th>部屋</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.property.building %></td>
+          <td><%= room.room_name %></td>
+          <td><%= link_to '詳細', property_room_path(room.property.id, room.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
