@@ -1,11 +1,24 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-<%=link_to '物件登録', new_property_path %>
+<h4 class='py-3'>物件一覧</h4>
+<%=link_to '物件登録', new_property_path, class:'btn btn-primary' %>
 
-<% @property.each do |property| %>
-<div>
-<%= link_to property.building, property_path(property.id) %>
-</div>
-<% end %>
+<table class='table mt-3'>
+    <thead>
+      <tr>
+        <th>物件名称</th>
+        <th>部屋数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @property.each do |property| %>
+        <tr>
+          <td><%= property.building %></td>
+          <td><%= property.rooms.count %></td>
+          <td><%= link_to '詳細', property_path(property.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
