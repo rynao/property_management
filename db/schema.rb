@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_035921) do
+ActiveRecord::Schema.define(version: 2022_02_01_000459) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 2022_01_31_035921) do
     t.bigint "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["property_id"], name: "index_contracts_on_property_id"
     t.index ["room_id"], name: "index_contracts_on_room_id"
+    t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
   create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -32,9 +34,11 @@ ActiveRecord::Schema.define(version: 2022_01_31_035921) do
     t.bigint "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["contract_id"], name: "index_payments_on_contract_id"
     t.index ["property_id"], name: "index_payments_on_property_id"
     t.index ["room_id"], name: "index_payments_on_room_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,6 +53,8 @@ ActiveRecord::Schema.define(version: 2022_01_31_035921) do
     t.string "business_entity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,7 +62,9 @@ ActiveRecord::Schema.define(version: 2022_01_31_035921) do
     t.bigint "property_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["property_id"], name: "index_rooms_on_property_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -74,8 +82,12 @@ ActiveRecord::Schema.define(version: 2022_01_31_035921) do
 
   add_foreign_key "contracts", "properties"
   add_foreign_key "contracts", "rooms"
+  add_foreign_key "contracts", "users"
   add_foreign_key "payments", "contracts"
   add_foreign_key "payments", "properties"
   add_foreign_key "payments", "rooms"
+  add_foreign_key "payments", "users"
+  add_foreign_key "properties", "users"
   add_foreign_key "rooms", "properties"
+  add_foreign_key "rooms", "users"
 end
