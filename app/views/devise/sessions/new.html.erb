@@ -1,0 +1,21 @@
+<div class='container mt-5 d-flex justify-content-center'>
+  <div class='card shadow px-5 py-3' style='max-width: 600px'>
+    <div class='row g-3 d-flex justify-content-center'>
+      <h5>ログイン</h5>
+      <%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label 'メールアドレス', class:'form-label' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control ' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label 'パスワード', class:'form-label' %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class:'form-control ' %>
+        </div>
+        <div class="mb-3">
+          <%= f.submit "ログイン",class:'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

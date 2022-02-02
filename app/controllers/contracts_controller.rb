@@ -1,4 +1,5 @@
 class ContractsController < ApplicationController
+  # protect_from_forgery
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -11,6 +12,7 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
+    binding.pry
     if @contract.save
       redirect_to contract_path(@contract.id)
     else
@@ -40,6 +42,12 @@ class ContractsController < ApplicationController
     end
   end
 
+  # Ajax処理を行う処理
+  def get_rooms
+    rooms = Room.where(property_id: params[:property_id])
+    render json:{ rooms: rooms }
+  end
+
   private
 
   def find_params
@@ -47,6 +55,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:start_date, :end_date, :rent, :property_id, :room_id)
+    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id])
   end
 end

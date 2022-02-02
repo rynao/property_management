@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_29_022522) do
+ActiveRecord::Schema.define(version: 2022_02_01_000459) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 2022_01_29_022522) do
     t.bigint "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["property_id"], name: "index_contracts_on_property_id"
     t.index ["room_id"], name: "index_contracts_on_room_id"
+    t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
   create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -32,9 +34,11 @@ ActiveRecord::Schema.define(version: 2022_01_29_022522) do
     t.bigint "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["contract_id"], name: "index_payments_on_contract_id"
     t.index ["property_id"], name: "index_payments_on_property_id"
     t.index ["room_id"], name: "index_payments_on_room_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,6 +53,8 @@ ActiveRecord::Schema.define(version: 2022_01_29_022522) do
     t.string "business_entity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,13 +62,32 @@ ActiveRecord::Schema.define(version: 2022_01_29_022522) do
     t.bigint "property_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["property_id"], name: "index_rooms_on_property_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nickname", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "contracts", "properties"
   add_foreign_key "contracts", "rooms"
+  add_foreign_key "contracts", "users"
   add_foreign_key "payments", "contracts"
   add_foreign_key "payments", "properties"
   add_foreign_key "payments", "rooms"
+  add_foreign_key "payments", "users"
+  add_foreign_key "properties", "users"
   add_foreign_key "rooms", "properties"
+  add_foreign_key "rooms", "users"
 end
