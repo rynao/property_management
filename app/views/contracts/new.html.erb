@@ -1,74 +1,72 @@
 <%= render 'layouts/header' %>
 
 <div class='container mt-5'>
-<h3>契約情報登録</h3>
+
 <div>
 </div>
-<%= form_with model:@contract, local: true do |f| %>
-  <div class='row g-3'>
-    <div class='col-md-3 mb-3'>
-      <label class='form-label'>物件名称</label>
-      <div class='form-control'>
-        <%= f.collection_select :property_id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'pulldown'} %>
-      </div>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>部屋</label>
-      <div class='form-control'>
-        <%= f.collection_select :room_id, Room.all, :id, :room_name, { include_blank: '選択してください'}, {class:'pulldown'} %>
-      </div>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>契約開始月</label>
-      <%= f.date_select :start_date, {discard_day: true, start_year:1950}, class:'form-control' %>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>契約終了月</label>
-      <%= f.date_select :end_date, {discard_day: true, start_year:1950}, class:'form-control' %>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>家賃</label>
-      <%= f.text_field :rent, class:'form-control', placeholder:'例：70000' %>
-    </div>
-    <div class=''>
-      <%= f.submit "登録" ,class:'btn btn-primary' %>
-    </div>
-<% end %>
+<%# <%= form_with model:@contract, local: true do |f| %> %>
+  <%# <div class='row g-3'> %>
+    <%# <div class='col-md-3 mb-3'> %>
+      <%# <label class='form-label'>物件名称</label> %>
+      <%# <div class='form-control'> %>
+        <%# <%= f.collection_select :property_id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'pulldown'} %> %>
+      <%# </div> %>
+    <%# </div> %>
+    <%# <div class='col-md-2 mb-3'> %>
+      <%# <label class='form-label'>部屋</label> %>
+      <%# <div class='form-control'> %>
+        <%# <%= f.collection_select :room_id, Room.all, :id, :room_name, { include_blank: '選択してください'}, {class:'pulldown'} %> %>
+      <%# </div> %>
+    <%# </div> %>
+    <%# <div class='col-md-2 mb-3'> %>
+      <%# <label class='form-label'>契約開始月</label> %>
+      <%# <%= f.date_select :start_date, {discard_day: true, start_year:1950}, class:'form-control' %> %>
+    <%# </div> %>
+    <%# <div class='col-md-2 mb-3'> %>
+      <%# <label class='form-label'>契約終了月</label> %>
+      <%# <%= f.date_select :end_date, {discard_day: true, start_year:1950}, class:'form-control' %> %>
+    <%# </div> %>
+    <%# <div class='col-md-2 mb-3'> %>
+      <%# <label class='form-label'>家賃</label> %>
+      <%# <%= f.text_field :rent, class:'form-control', placeholder:'例：70000' %> %>
+    <%# </div> %>
+    <%# <div class=''> %>
+      <%# <%= f.submit "登録" ,class:'btn btn-primary' %> %>
+    <%# </div> %>
+<%# <% end %> %>
 <%=link_to 'もどる', contracts_path, class:'' %>
   </div>
 </div>
 
-<%= form_with model:@contract, local: true do |f| %>
-  <div class='row g-3'>
-    <div class='col-md-3 mb-3'>
-      <label class='form-label'>物件名称</label>
-      <div class='form-control'>
-        <%= f.collection_select :property_id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'pulldown'} %>
-        <%= Property.all.each do |property| %>
-        <%# <% template{id: "room-of-property#{property.id}"} %> %>
-        <%= f.collection_select :room_id, property.rooms, :id, :room_name, { include_blank: '選択してください'}, {class:'pulldown'} %>
-        <% end %>
+<div class='container mt-5'>
+  <h3>契約情報登録</h3>
+  <div>
+  <%= form_with model:@contract, local: true do |f| %>
+    <div class='row g-3'>
+      <div class="property-area col-md-3 mb-3">
+        <label class='form-label'>物件名称</label>
+        <%= collection_select :property, :id, Property.all, :id, :building, { include_blank: '選択してください'}, {class:'form-control'}  %>
+      </div>
+      <div class="col-md-2 mb-3", id="room-area">
+        <label class='form-label'>部屋</label>
+        <%= collection_select :property, :id, Room.all, :id, :room_name, { include_blank: '選択してください'}, {class:'form-control'}  %>
+      </div>
+      <div class='col-md-2 mb-3'>
+        <label class='form-label'>契約開始月</label>
+        <%= f.date_select :start_date, {discard_day: true, start_year:1950}, class:'form-control' %>
+        </div>
+      <div class='col-md-2 mb-3'>
+        <label class='form-label'>契約終了月</label>
+        <%= f.date_select :end_date, {discard_day: true, start_year:1950}, class:'form-control' %>
+      </div>
+      <div class='col-md-2 mb-3'>
+        <label class='form-label'>家賃</label>
+        <%= f.text_field :rent, class:'form-control', placeholder:'例：70000' %>
+      </div>
+      <div class=''>
+        <%= f.submit "登録" ,class:'btn btn-primary' %>
       </div>
     </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>部屋</label>
-      <div class='form-control'>
-        <%= f.collection_select :room_id, Room.all, :id, :room_name, { include_blank: '選択してください'}, {class:'pulldown'} %>
-      </div>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>契約開始月</label>
-      <%= f.date_select :start_date, {discard_day: true, start_year:1950}, class:'form-control' %>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>契約終了月</label>
-      <%= f.date_select :end_date, {discard_day: true, start_year:1950}, class:'form-control' %>
-    </div>
-    <div class='col-md-2 mb-3'>
-      <label class='form-label'>家賃</label>
-      <%= f.text_field :rent, class:'form-control', placeholder:'例：70000' %>
-    </div>
-    <div class=''>
-      <%= f.submit "登録" ,class:'btn btn-primary' %>
-    </div>
-<% end %>
+  <% end %>
+  </div>
+</div>
