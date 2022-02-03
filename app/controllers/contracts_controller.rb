@@ -55,6 +55,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id])
+    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id],user_id: current_user.id)
   end
 end
