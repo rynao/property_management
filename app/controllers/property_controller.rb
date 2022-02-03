@@ -2,7 +2,7 @@ class PropertyController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @property = current_user.roperty.all
+    @property = current_user.property.all
   end
 
   def show

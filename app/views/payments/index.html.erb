@@ -3,7 +3,7 @@
 <div class='container'>
 <h4 class='py-3'>家賃管理</h4>
 <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
-<%= column_chart @chart %>
+<%= column_chart @payments %>
   <table class='table mt-3'>
     <thead>
       <tr>
@@ -13,11 +13,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @summary.each do |smr| %>
+      <% @payments.each do |payment| %>
         <tr>
-          <td><%= smr['building'] %></td>
-          <td><%= smr['paid_date'].strftime("%Y年%m月") %></td>
-          <td><%= smr['sumrent'].to_s(:currency, locale: 'jp') %></td>
+          <td><%= payment[0][0] %></td>
+          <td><%= payment[0][1].strftime("%Y年%m月") %></td>
+          <td><%= payment[1].to_s(:currency, locale: 'jp') %></td>
         </tr>
       <% end %>
     </tbody>
