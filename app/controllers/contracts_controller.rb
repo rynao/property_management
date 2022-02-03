@@ -3,7 +3,7 @@ class ContractsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @contracts = Contract.includes(:property, :room)
+    @contracts = current_user.contracts.includes(:property, :room)
   end
 
   def new
@@ -12,7 +12,6 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
-    binding.pry
     if @contract.save
       redirect_to contract_path(@contract.id)
     else
@@ -55,6 +54,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id])
+    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id],user_id: current_user.id)
   end
 end

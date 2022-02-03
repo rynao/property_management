@@ -2,18 +2,20 @@ class PaymentsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    sql= "
-      SELECT pr.building, pa.paid_date, SUM(rent) AS sumrent
-      FROM payments pa
-      LEFT OUTER JOIN rooms r ON pa.room_id = r.id
-      JOIN properties pr ON pa.property_id = pr.id
-      JOIN contracts c ON pa.contract_id = c.id
-      GROUP BY paid_date, pr.id 
-      ORDER BY pr.id, paid_date"
-    smr = ActiveRecord::Base.connection.select_all(sql)
-    @summary = smr.to_a
+    # sql= "
+    #   SELECT pr.building, pa.paid_date, SUM(rent) AS sumrent
+    #   FROM payments pa
+    #   LEFT OUTER JOIN rooms r ON pa.room_id = r.id
+    #   JOIN properties pr ON pa.property_id = pr.id
+    #   JOIN contracts c ON pa.contract_id = c.id
+    #   GROUP BY paid_date, pr.id 
+    #   ORDER BY pr.id, paid_date"
+    # smr = ActiveRecord::Base.connection.select_all(sql)
+    # @summary = smr.to_a
 
-    @chart = Payment.joins(:property).joins(:contract).group('building').group('paid_date').sum('contracts.rent')
+    @payments = Payment.joins(:property, :contract, :user)
+                .where(user_id: current_user.id)
+                .group('building').group('paid_date').sum('contracts.rent')
   end
 
   def new
@@ -59,6 +61,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :paid, :property_id, :room_id, :contract_id)
+    params.require(:payment).permit(:paid_date, :paid, :property_id, :room_id, :contract_id).merge(user_id: current_user.id)
   end
 end
