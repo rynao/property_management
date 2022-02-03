@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rooms = Room.includes(:property)
+    @rooms = current_user.rooms.includes(:property)
   end
 
   def new
@@ -49,7 +49,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:room_name).merge(property_id: params[:property_id])
+    params.require(:room).permit(:room_name).merge(property_id: params[:property_id], user_id: current_user.id)
   end
 
 end

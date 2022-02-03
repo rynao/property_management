@@ -59,6 +59,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :paid, :property_id, :room_id, :contract_id)
+    params.require(:payment).permit(:paid_date, :paid, :property_id, :room_id, :contract_id).merge(user_id: current_user.id)
   end
 end

@@ -1,9 +1,8 @@
 class PropertyController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @property = Property.all
+    @property = current_user.roperty.all
   end
 
   def show
@@ -48,6 +47,6 @@ class PropertyController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity)
+    params.require(:property).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity).merge(user_id: current_user.id)
   end
 end
