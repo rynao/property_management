@@ -27,15 +27,15 @@
     事業主体：<%= @property.business_entity %>
   </div>
   <div>
-    <%=link_to '編集', edit_property_path %>
-    <%=link_to '削除', property_path, method: :delete, data: {confirm: "物件に紐付く部屋および契約情報も全て削除されます。削除しますか？"} %>
+    <%=link_to '編集', edit_property_path, class:'btn btn-secondary' %>
+    <%=link_to '削除', property_path, method: :delete, data: {confirm: "物件に紐付く部屋および契約情報も全て削除されます。削除しますか？"}, class:'btn btn-secondary' %>
     <%=link_to '戻る', property_index_path %>
   </div>
   <div class='mt-5'>
     <h4>
       部屋一覧
     </h4>
-    <%=link_to '部屋登録', new_property_room_path(@property.id) %>
+    <%=link_to '部屋登録', new_property_room_path(@property.id), class:'btn btn-primary' %>
     <% @property.rooms.each do |room| %>
       <div>
         <%= link_to room.room_name, property_room_path(@property.id, room.id) %>
@@ -46,7 +46,7 @@
     <h4>
       契約一覧
     </h4>
-    <%=link_to '契約登録', new_contract_path %>
+    <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
     <% @property.contracts.each do |contract| %>
       <div>
         <%= link_to contract.room.room_name, contract_path(contract.id) %>

@@ -9,8 +9,8 @@
     <%= @room.room_name %>
   </div>
   <div>
-    <%=link_to '編集', edit_property_room_path %>
-    <%=link_to '削除', property_room_path, method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"} %>
+    <%=link_to '編集', edit_property_room_path, class:'btn btn-secondary' %>
+    <%=link_to '削除', property_room_path, method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"}, class:'btn btn-secondary' %>
     <%=link_to '戻る', property_path(@room.property.id) %>
   </div>
 </div>
