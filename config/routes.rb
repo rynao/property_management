@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :rooms, only: :index
   resources :contracts
   resources :payments
-  get 'get_rooms', to: 'contracts#get_rooms'
+  get 'get_rooms', to: 'application#get_rooms'
+  get 'get_contracts', to: 'application#get_contracts'
 end

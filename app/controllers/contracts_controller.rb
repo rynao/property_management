@@ -1,5 +1,4 @@
 class ContractsController < ApplicationController
-  # protect_from_forgery
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -39,12 +38,6 @@ class ContractsController < ApplicationController
     else
       render :show
     end
-  end
-
-  # Ajax処理を行う処理
-  def get_rooms
-    rooms = Room.where(property_id: params[:property_id])
-    render json:{ rooms: rooms }
   end
 
   private
