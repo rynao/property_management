@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pry-rails'
 gem 'chartkick'
 gem 'devise'
+gem 'chart-js-rails', '~> 0.1.0'
