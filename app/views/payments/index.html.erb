@@ -3,6 +3,8 @@
 <div class='container'>
 <h4 class='py-3'>家賃管理</h4>
 <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
+
+<canvas id="myChart" width="400" height="200"></canvas>
 <%= column_chart @payments %>
   <table class='table mt-3'>
     <thead>
@@ -23,3 +25,4 @@
     </tbody>
   </table>
 </div>
+
