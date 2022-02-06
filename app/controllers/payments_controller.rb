@@ -14,8 +14,20 @@ class PaymentsController < ApplicationController
     # @summary = smr.to_a
 
     @payments = Payment.joins(:property, :contract, :user)
-                .where(user_id: current_user.id)
-                .group('building').group('paid_date').sum('contracts.rent')
+                .where(user_id: current_user.id).order(:paid_date)
+                .group('paid_date').sum('contracts.rent')
+                
+
+    @month_payments = Payment.joins(:property, :contract, :user)
+                      .where(user_id: current_user.id, paid_date: Time.now.all_month)
+                      .group('building').sum('contracts.rent')
+
+    gon.month_labels = @month_payments.map{|p|p[0]}
+    gon.month_data = @month_payments.map{|p|p[1]}
+
+    gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
+    gon.all_data = @payments.map{|p|p[1]}
+
   end
 
   def new
