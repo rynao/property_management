@@ -3,26 +3,35 @@
 <div class='container'>
 <h4 class='py-3'>家賃管理</h4>
 <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
-
-<canvas id="myChart" width="400" height="200"></canvas>
-<%= column_chart @payments %>
-  <table class='table mt-3'>
-    <thead>
-      <tr>
-        <th><%= link_to "物件名称", :sort => "building"%></th>
-        <th><%= link_to "期間", :sort => "paid_date"%></th>
-        <th><%= link_to "合計家賃", :sort => "rent"%></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @payments.each do |payment| %>
+<div class='row g-3 my-3'>
+  <div class='d-flex mb-3'>
+    <div class='col-md-6 px-2'>
+      <h5>今月</h5>
+      <canvas id="monthChart"></canvas>
+    </div>
+    <div class='col-md-6 px-2 text-align-center'>
+      <h5>累計</h5>
+      <canvas id="allChart"></canvas>
+    </div>
+  </div>
+  <%# <%= column_chart @payments %>
+  <h5>今月</h5>
+    <table class='table'>
+      <thead>
         <tr>
-          <td><%= payment[0][0] %></td>
-          <td><%= payment[0][1].strftime("%Y年%m月") %></td>
-          <td><%= payment[1].to_s(:currency, locale: 'jp') %></td>
+          <th><%= link_to "物件名称", :sort => "building"%></th>
+          <th><%= link_to "合計家賃", :sort => "rent"%></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @month_payments.each do |payment| %>
+          <tr>
+            <td><%= payment[0] %></td>
+            <td><%= payment[1].to_s(:currency, locale: 'jp') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
