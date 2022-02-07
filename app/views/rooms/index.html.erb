@@ -7,7 +7,13 @@
       <tr>
         <th>物件名称</th>
         <th>部屋</th>
-        <th>最新契約開始日</th>
+        <th>間取り</th>
+        <th>広さ</th>
+        <th>方角</th>
+        <th>契約状況</th>
+        <th>入居者</th>
+        <th>契約開始日</th>
+        <th>契約終了日</th>
       </tr>
     </thead>
     <tbody>
@@ -15,9 +21,21 @@
         <tr>
           <td><%= room.property.building %></td>
           <td><%= room.name %></td>
-          <% if room.contracts.exists? %>
-            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%m月") %></td>
+          <td><%= room.layout %></td>
+          <td><%= room.room_size %></td>
+          <td><%= room.direction %></td>
+          <% if room.contracts.exists? && room.contracts.order(start_date: :desc).first.end_date >= Date.today %>
+            <td>契約中</td>
+            <td><%= room.contracts.order(start_date: :desc).first.contractor %></td>
           <% else %>
+            <td style="color:red;">空室</td>
+            <td>-</td>
+          <% end %>
+          <% if room.contracts.exists? %>
+            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%m月%d日") %></td>
+            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%m月%d日") %></td>
+          <% else %>
+            <td>-</td>
             <td>-</td>
           <% end %>
           <td><%= link_to '詳細', property_room_path(room.property.id, room.id) %></td>

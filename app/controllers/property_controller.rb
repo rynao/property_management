@@ -47,6 +47,6 @@ class PropertyController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity).merge(user_id: current_user.id)
+    params.require(:property).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area).merge(user_id: current_user.id)
   end
 end
