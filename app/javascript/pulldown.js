@@ -21,7 +21,7 @@ function buildRoomHTML(XHR) {
   const rooms = XHR.response.rooms;
   let items = [];
   rooms.forEach(room => {
-    item = `<option value=${room.id}> ${room.room_name}</option>`;
+    item = `<option value=${room.id}> ${room.name}</option>`;
     items.push(item);
   });
   const html = `

@@ -38,18 +38,7 @@
     <%=link_to '部屋登録', new_property_room_path(@property.id), class:'btn btn-primary' %>
     <% @property.rooms.each do |room| %>
       <div>
-        <%= link_to room.room_name, property_room_path(@property.id, room.id) %>
-      </div>
-    <% end %>
-  </div>
-  <div class='mt-5'>
-    <h4>
-      契約一覧
-    </h4>
-    <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
-    <% @property.contracts.each do |contract| %>
-      <div>
-        <%= link_to contract.room.room_name, contract_path(contract.id) %>
+        <%= link_to room.name, property_room_path(@property.id, room.id) %>
       </div>
     <% end %>
   </div>

@@ -16,7 +16,7 @@
       <% @contracts.each do |contract| %>
         <tr>
           <td><%= contract.property.building %></td>
-          <td><%= contract.room.room_name %></td>
+          <td><%= contract.room.name %></td>
           <td><%= contract.start_date.strftime("%Y年%m月") %></td>
           <td><%= contract.end_date.strftime("%Y年%m月") %></td>
           <td><%= link_to '詳細', contract_path(contract.id) %></td>

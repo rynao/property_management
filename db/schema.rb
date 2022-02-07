@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_000459) do
+ActiveRecord::Schema.define(version: 2022_02_07_014018) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -21,9 +21,20 @@ ActiveRecord::Schema.define(version: 2022_02_01_000459) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.string "contractor"
     t.index ["property_id"], name: "index_contracts_on_property_id"
     t.index ["room_id"], name: "index_contracts_on_room_id"
     t.index ["user_id"], name: "index_contracts_on_user_id"
+  end
+
+  create_table "management_companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "department"
+    t.string "sales_person"
+    t.string "telephone"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -54,15 +65,22 @@ ActiveRecord::Schema.define(version: 2022_02_01_000459) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.integer "land_area"
+    t.integer "building_area"
+    t.bigint "management_company_id"
+    t.index ["management_company_id"], name: "index_properties_on_management_company_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "room_name"
+    t.string "name", null: false
     t.bigint "property_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.string "layout"
+    t.integer "room_size"
+    t.string "direction"
     t.index ["property_id"], name: "index_rooms_on_property_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
