@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_035518) do
+ActiveRecord::Schema.define(version: 2022_02_08_020328) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_035518) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.string "contractor"
+    t.integer "management_cost", null: false
     t.index ["property_id"], name: "index_contracts_on_property_id"
     t.index ["room_id"], name: "index_contracts_on_room_id"
     t.index ["user_id"], name: "index_contracts_on_user_id"
@@ -79,7 +80,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_035518) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.string "layout"
-    t.integer "room_size"
+    t.float "room_size"
     t.string "direction"
     t.index ["property_id"], name: "index_rooms_on_property_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"

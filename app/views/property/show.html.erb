@@ -29,9 +29,17 @@
     <tbody>
       <tr>
         <td><%= @property.total_units %></td>
-        <td><%= @property.building_year.strftime("%Y年%m月") %></td>
-        <td><%= @property.land_area %>㎡</td>
-        <td><%= @property.building_area %>㎡</td>
+        <td><%= @property.building_year.strftime("%Y年%-m月") %></td>
+        <% unless @property.land_area.nil? %>
+          <td><%= @property.land_area %>㎡</td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% unless @property.building_area.nil? %>
+          <td><%= @property.building_area %>㎡</td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= @property.property_type %></td>
         <td><%= @property.business_entity %></td>
       </tr>
@@ -61,7 +69,11 @@
         <tr>
           <td><%= room.name %></td>
           <td><%= room.layout %></td>
-          <td><%= room.room_size %></td>
+          <% unless room.room_size.nil? %>
+            <td><%= room.room_size %>㎡</td>
+          <% else %>
+            <td> </td>
+          <% end %>
           <td><%= room.direction %></td>
           <% if room.contracts.exists? && room.contracts.order(start_date: :desc).first.end_date >= Date.today %>
             <td>契約中</td>
@@ -71,8 +83,8 @@
             <td>-</td>
           <% end %>
           <% if room.contracts.exists? %>
-            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%m月%d日") %></td>
-            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%m月%d日") %></td>
+            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%-m月%-d日") %></td>
           <% else %>
             <td>-</td>
             <td>-</td>

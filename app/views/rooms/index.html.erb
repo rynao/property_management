@@ -32,8 +32,8 @@
             <td>-</td>
           <% end %>
           <% if room.contracts.exists? %>
-            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%m月%d日") %></td>
-            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%m月%d日") %></td>
+            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%-m月%-d日") %></td>
           <% else %>
             <td>-</td>
             <td>-</td>

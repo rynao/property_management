@@ -36,14 +36,10 @@
         <%= f.date_select :paid_date, {discard_day: true, start_year:2000}, class:'form-control' %>
       </div>
       <div class='col-md-2 mb-3'>
-        <label class='form-label'>支払い有無</label>
+        <label class='form-label'>未納チェック</label>
         <div>
-          <%= f.radio_button :paid, '済' %>
-          <%= f.label :paid_ok, "済" %>
-        </div>
-        <div>
-          <%= f.radio_button :rent, '未' %>
-          <%= f.label :paid_yet, "未" %>
+          <%= f.check_box :paid %>
+          <%= f.label :paid, "未" %>
         </div>
       </div>
       <div class=''>
