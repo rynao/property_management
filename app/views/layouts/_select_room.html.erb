@@ -1,2 +1,2 @@
 <%= label :contract, :room_id %><br>
-<%= collection_select :room, :id, Room.where(property_id: property_id), :id, :room_name, { include_blank: '選択してください'}, {class:'pulldown'} %>
+<%= collection_select :room, :id, Room.where(property_id: property_id), :id, :name, { include_blank: '選択してください'}, {class:'pulldown'} %>

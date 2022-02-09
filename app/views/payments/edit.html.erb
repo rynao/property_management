@@ -16,16 +16,16 @@
       <div class='col-md-2 mb-3', id="room-area">
         <label class='form-label'>部屋</label>
         <select name='room_id', id ='room_id', class='form-control'>
-          <option value=<%= @payment.room.id %>><%= @payment.room.room_name %></option>
+          <option value=<%= @payment.room.id %>><%= @payment.room.name %></option>
           <% current_user.rooms.all.each do |room| %>
-            <option value=<%= room.id %>><%= room.room_name %></option> 
+            <option value=<%= room.id %>><%= room.name %></option> 
           <% end %>
         </select>
       </div>
       <div class='col-md-2 mb-3', id="contract-area">
         <label class='form-label'>契約</label>
         <select name='contract_id', id ='contract_id', class='form-control'>
-          <option value=''>選択してください</option>
+          <option value=<%= @payment.contract.id %>><%= @payment.contract.start_date %></option>
           <% current_user.contracts.all.each do |contract| %>
             <option value=<%= contract.id %>><%= contract.start_date %></option> 
           <% end %>
@@ -36,15 +36,12 @@
         <%= f.date_select :paid_date, {discard_day: true, start_year:2000}, class:'form-control' %>
       </div>
       <div class='col-md-2 mb-3'>
-        <label class='form-label'>支払い有無</label>
+        <label class='form-label'>未納チェック</label>
         <div>
-          <%= f.radio_button :paid, '済' %>
-          <%= f.label :paid_ok, "済" %>
+          <%= f.check_box :paid %>
+          <%= f.label :paid, "未" %>
         </div>
-        <div>
-          <%= f.radio_button :rent, '未' %>
-          <%= f.label :paid_yet, "未" %>
-        </div>
+      </div>
       </div>
       <div class=''>
         <%= f.submit "登録" ,class:'btn btn-primary' %>

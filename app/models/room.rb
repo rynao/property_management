@@ -1,4 +1,6 @@
 class Room < ApplicationRecord
+  validates :name, presence: true
+
   belongs_to :user
   belongs_to :property
   has_many :contracts, dependent: :destroy

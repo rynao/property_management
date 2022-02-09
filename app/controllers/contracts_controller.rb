@@ -2,7 +2,9 @@ class ContractsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @contracts = current_user.contracts.includes(:property, :room)
+    @contracts = current_user.contracts.includes(:property, :room).where("end_date >= ?",Date.today)
+    @old_contracts = current_user.contracts.includes(:property, :room).where("end_date < ?",Date.today)
+
   end
 
   def new
@@ -12,7 +14,7 @@ class ContractsController < ApplicationController
   def create
     @contract = Contract.new(contract_params)
     if @contract.save
-      redirect_to contract_path(@contract.id)
+      redirect_to contracts_path
     else
       render :new
     end
@@ -26,7 +28,7 @@ class ContractsController < ApplicationController
 
   def update
     if @contract.update(contract_params)
-      redirect_to contract_path(@contract.id)
+      redirect_to contracts_path
     else
       render :edit
     end
@@ -47,6 +49,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:start_date, :end_date, :rent).merge(property_id: params[:property_id], room_id: params[:room_id],user_id: current_user.id)
+    params.require(:contract).permit(:start_date, :end_date, :rent, :contractor, :management_cost).merge(property_id: params[:property_id], room_id: params[:room_id],user_id: current_user.id)
   end
 end

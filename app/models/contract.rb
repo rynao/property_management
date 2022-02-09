@@ -6,5 +6,5 @@ class Contract < ApplicationRecord
   belongs_to :user
   belongs_to :property
   belongs_to :room
-  has_many :payments, dependent: :destroy
+  has_many :payments, dependent: :nullify
 end

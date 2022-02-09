@@ -1,28 +1,70 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-<h4 class='py-3'>契約一覧</h4>
-<%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
-  <table class='table mt-3'>
-    <thead>
-      <tr>
-        <th><%= link_to "物件名称", :sort => "building"%></th>
-        <th><%= link_to "部屋", :sort => "room"%></th>
-        <th><%= link_to "契約開始月", :sort => "paid_date"%></th>
-        <th><%= link_to "契約終了月", :sort => "rent"%></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @contracts.each do |contract| %>
+  <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
+  <div class='mt-3'>
+    <h4 class='py-3'>契約一覧</h4>
+    <table class='table mt-3'>
+      <thead>
         <tr>
-          <td><%= contract.property.building %></td>
-          <td><%= contract.room.room_name %></td>
-          <td><%= contract.start_date.strftime("%Y年%m月") %></td>
-          <td><%= contract.end_date.strftime("%Y年%m月") %></td>
-          <td><%= link_to '詳細', contract_path(contract.id) %></td>
+          <th>物件名称</th>
+          <th>部屋</th>
+          <th>契約開始月</th>
+          <th>契約終了月</th>
+          <th>家賃</th>
+          <th>管理費</th>
+          <th>契約者</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>     
+      </thead>
+      <tbody>
+        <% @contracts.each do |contract| %>
+          <tr>
+            <td><%= contract.property.building %></td>
+            <td><%= contract.room.name %></td>
+            <td><%= contract.start_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= contract.end_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= contract.rent.to_s(:currency, locale: 'jp') %></td>
+            <td><%= contract.management_cost.to_s(:currency, locale: 'jp') %></td>
+            <td><%= contract.contractor %></td>
+            <%# <td><%= link_to '詳細', contract_path(contract.id) %></td>
+            <td><%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %></td>
+            <td><%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class='mt-4'>
+    <h5 class='py-3'>過去の契約一覧</h5>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>物件名称</th>
+          <th>部屋</th>
+          <th>契約開始月</th>
+          <th>契約終了月</th>
+          <th>家賃</th>
+          <th>管理費</th>
+          <th>契約者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @old_contracts.each do |contract| %>
+          <tr>
+            <td><%= contract.property.building %></td>
+            <td><%= contract.room.name %></td>
+            <td><%= contract.start_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= contract.end_date.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= contract.rent.to_s(:currency, locale: 'jp') %></td>
+            <td><%= contract.management_cost.to_s(:currency, locale: 'jp') %></td>
+            <td><%= contract.contractor %></td>
+            <%# <td><%= link_to '詳細', contract_path(contract.id) %></td>
+            <td><%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %></td>
+            <td><%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 

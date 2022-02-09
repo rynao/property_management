@@ -28,6 +28,9 @@ class PaymentsController < ApplicationController
     gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
     gon.all_data = @payments.map{|p|p[1]}
 
+    @index = Payment.joins(:property, :contract, :user)
+    .where(user_id: current_user.id).order(paid_date: :DESC).order(:building)
+
   end
 
   def new
