@@ -38,4 +38,18 @@ window.addEventListener('load', function(){
             }
         }
     });
+
+    const ctx3 = document.getElementById('vacancyChart');
+    const percentage = gon.occupancy_rate
+    const vacancyChart = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                label: '稼働状況',
+                data: [percentage, 100 - percentage],
+                backgroundColor: ['RGB(68,114,196)','rgba(0, 0, 0, 0)'],
+                cutout:'50%',
+            }]
+        },
+    });
 });

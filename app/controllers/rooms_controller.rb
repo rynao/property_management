@@ -2,7 +2,10 @@ class RoomsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rooms = current_user.rooms.includes(:property)
+    @rooms = Room.joins(:property, :user)
+                  .where(user_id: current_user.id)
+                  .order("properties.building")
+                  .order("rooms.name")
   end
 
   def new
