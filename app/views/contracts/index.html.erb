@@ -29,8 +29,10 @@
             <td><%= contract.management_cost.to_s(:currency, locale: 'jp') %></td>
             <td><%= contract.contractor %></td>
             <%# <td><%= link_to '詳細', contract_path(contract.id) %></td>
-            <td><%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %></td>
-            <td><%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %></td>
+            <td>
+              <%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %>
+              <%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -61,8 +63,10 @@
             <td><%= contract.management_cost.to_s(:currency, locale: 'jp') %></td>
             <td><%= contract.contractor %></td>
             <%# <td><%= link_to '詳細', contract_path(contract.id) %></td>
-            <td><%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %></td>
-            <td><%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %></td>
+            <td>
+              <%=link_to '編集', edit_contract_path(contract.id), class:'btn btn-outline-secondary' %>
+              <%=link_to '削除', contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %>
+            </td>
           </tr>
         <% end %>
       </tbody>

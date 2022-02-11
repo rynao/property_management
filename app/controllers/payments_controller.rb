@@ -41,7 +41,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
-      redirect_to payment_path(@payment.id)
+      redirect_to payments_path
     else
       render :new
     end
@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
 
   def update
     if @payment.update(payment_params)
-      redirect_to payment_path(@payment.id)
+      redirect_to payments_path
     else
       render :edit
     end
@@ -76,6 +76,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :paid).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
+    params.require(:payment).permit(:paid_date, :not_paid).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
   end
 end
