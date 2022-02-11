@@ -1,8 +1,10 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-<h4 class='py-3'>物件一覧</h4>
-<%=link_to '物件登録', new_property_path, class:'btn btn-primary' %>
+  <div class='d-flex mt-5'>
+    <h4 style="margin-right: 40px;">物件一覧</h4>
+    <%=link_to '物件登録', new_property_path, class:'btn btn-primary' %>
+  </div>
 
 <table class='table mt-3'>
     <thead>
@@ -22,7 +24,7 @@
           <td><%= property.city %></td>
           <td><%= property.property_type %></td>
           <td><%= property.total_units %></td>
-          <td><%= link_to '詳細', property_path(property.id) %></td>
+          <td><%= link_to '詳細', property_path(property.id), class:'btn btn-outline-secondary' %></td>
         </tr>
       <% end %>
     </tbody>

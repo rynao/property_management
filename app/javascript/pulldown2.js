@@ -47,10 +47,12 @@ function buildContractHTML(XHR) {
     items.push(item);
   });
   const html = `
-    <label class='form-label'>契約</label>
-    <select name='contract_id', class='form-control'>
-    ${items}
-    </select>`;
+    <label class='col-md-3 form-label'>契約</label>
+    <div class='col-md-6'>
+      <select name='contract_id', class='form-control'>
+      ${items}
+      </select>
+    </div`;
   return html;
 }
 

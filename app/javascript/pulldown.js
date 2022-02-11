@@ -25,9 +25,11 @@ function buildRoomHTML(XHR) {
     items.push(item);
   });
   const html = `
-    <label class='form-label'>部屋</label>
-    <select name='room_id', class='form-control'>
-    ${items}
-    </select>`;
+    <label class='col-md-3 form-label'>部屋</label>
+    <div class='col-md-6'>
+      <select name='room_id', class='form-control'>
+      ${items}
+      </select>
+    </div`;
   return html;
 }

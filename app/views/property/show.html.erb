@@ -4,16 +4,18 @@
   <h3>
     <%= @property.building %>
   </h3>
-  <div class='mb-3'>
-    〒<%= @property.postal_code %>
-    <%= @property.prefecture %>
-    <%= @property.city %>
-    <%= @property.address_line %>
-  </div>
-  <div>
-    <%=link_to '編集', edit_property_path, class:'btn btn-secondary' %>
-    <%=link_to '削除', property_path, method: :delete, data: {confirm: "物件に紐付く部屋および契約情報も全て削除されます。削除しますか？"}, class:'btn btn-secondary' %>
-    <%=link_to '戻る', property_index_path %>
+  <div class='d-flex justify-content-between'>
+    <div class='mb-3'>
+      〒<%= @property.postal_code %>
+      <%= @property.prefecture %>
+      <%= @property.city %>
+      <%= @property.address_line %>
+    </div>
+    <div>
+      <%=link_to '編集', edit_property_path, class:'btn btn-outline-secondary' %>
+      <%=link_to '削除', property_path, method: :delete, data: {confirm: "物件に紐付く部屋および契約情報も全て削除されます。削除しますか？"}, class:'btn btn-outline-secondary' %>
+      <%=link_to '戻る', property_index_path %>
+    </div>
   </div>
   <table class='table mt-3'>
     <thead>
@@ -45,12 +47,11 @@
       </tr>
     </tbody>
   </table>
-  <div class='mt-5'>
-    <h4>
-      部屋一覧
-    </h4>
-    <%=link_to '部屋登録', new_property_room_path(@property.id), class:'btn btn-primary' %>
-
+  <div class='' style="margin-top:100px;">
+    <div class='d-flex'>
+      <h4 style="margin-right: 40px;">部屋一覧</h4>
+      <%=link_to '部屋登録', new_property_room_path(@property.id), class:'btn btn-primary' %>
+    </div>
     <table class='table mt-3'>
     <thead>
       <tr>
@@ -89,7 +90,11 @@
             <td>-</td>
             <td>-</td>
           <% end %>
-          <td><%= link_to '詳細', property_room_path(room.property.id, room.id) %></td>
+          <td>
+            <%= link_to '詳細', property_room_path(room.property.id, room.id), class:'btn btn-outline-secondary' %>
+            <%= link_to '編集', edit_property_room_path(room.property.id, room.id), class:'btn btn-outline-secondary' %>
+            <%= link_to '削除', property_room_path(room.property.id, room.id), method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"}, class:'btn btn-outline-secondary' %>
+          </td>
         </tr>
       <% end %>
     </tbody>
