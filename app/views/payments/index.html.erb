@@ -1,20 +1,11 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-  <h4 class='py-3'>家賃管理</h4>
-  <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
+  <div class='d-flex mt-5'>
+    <h4 style="margin-right: 40px;">家賃管理</h4>
+    <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
+  </div>
   <div class='row g-3 my-3'>
-    <%# <div class='d-flex mb-3'>
-      <div class='col-md-6 px-2'>
-        <h5>今月</h5>
-        <canvas id="monthChart"></canvas>
-      </div>
-      <div class='col-md-6 px-2 text-align-center'>
-        <h5>累計</h5>
-        <canvas id="allChart"></canvas>
-      </div>
-    </div> %>
-      <%# <%= column_chart @payments %>
     <div>
       <h5>今月</h5>
       <table class='table'>
@@ -34,7 +25,7 @@
         </tbody>
       </table>
     </div>
-    <div>
+    <div style="margin-top:100px;">
       <h5>累計</h5>
       <table class='table'>
         <thead>
@@ -43,7 +34,7 @@
             <th>物件名称</th>
             <th>部屋</th>
             <th>家賃</th>
-            <th>支払</th>
+            <th>支払い</th>
           </tr>
         </thead>
         <tbody>
@@ -53,9 +44,15 @@
               <td><%= payment.property.building %></td>
               <td><%= payment.room.name %></td>
               <td><%= payment.contract.rent.to_s(:currency, locale: 'jp') %></td>
-              <td><%= payment.paid %></td>
-              <td><%=link_to '編集', edit_payment_path(payment.id), class:'btn btn-outline-secondary' %></td>
-            <td><%=link_to '削除', payment_path(payment.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %></td>
+              <% if payment.not_paid %>
+                <td style="color:red;">未納</td>
+              <% else %>
+                <td>○</td>
+              <% end %>
+              <td>
+                <%=link_to '編集', edit_payment_path(payment.id), class:'btn btn-outline-secondary' %>
+                <%=link_to '削除', payment_path(payment.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'btn btn-outline-secondary' %>
+              </td>
             </tr>
           <% end %>
         </tbody>

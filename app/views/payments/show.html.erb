@@ -15,7 +15,7 @@
     家賃：<%= @payment.contract.rent %>円
   </div>
     <div class='mb-3'>
-    支払い：<%= @payment.paid %>
+    未納：<%= @payment.not_paid %>
   </div>
   <div>
     <%=link_to '編集', edit_payment_path, class:'btn btn-secondary' %>

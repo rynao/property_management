@@ -34,7 +34,7 @@ class PropertyController < ApplicationController
   def create
     @property = Property.new(property_params)
     if @property.save
-      redirect_to root_path
+      redirect_to property_index_path
     else
       render :new
     end
