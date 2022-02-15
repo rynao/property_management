@@ -26,8 +26,5 @@ function buildRoomHTML(XHR) {
     items = items + item
   });
   const html = items;
-    item = `<option value=${room.id}> ${room.name}</option>`;
-    items.push(item);
-  });
   return html;
-}
+};
