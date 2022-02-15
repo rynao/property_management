@@ -15,15 +15,17 @@ function inputChangeRoom(event){
   XHR.responseType = "json";
   XHR.send();
   XHR.onload = () => {
-    const roomArea = document.getElementById("room-area");
-    roomArea.innerHTML = buildRoomHTML(XHR);
+    const roomSelect = document.getElementById("room-select");
+    roomSelect.innerHTML = buildRoomHTML(XHR);
   };
 };
 
 function buildRoomHTML(XHR) {
   const rooms = XHR.response.rooms;
+  let item = [];
   let items = [];
   rooms.forEach(room => {
+<<<<<<< Updated upstream
     item = `<option value=${room.id}> ${room.room_name}</option>`;
     items.push(item);
   });
@@ -32,6 +34,12 @@ function buildRoomHTML(XHR) {
     <select name='room_id', class='form-control'>
     ${items}
     </select>`;
+=======
+    item = `<option value=${room.id}> ${room.name}</option>`;
+    items = items + item
+  });
+  const html = items;
+>>>>>>> Stashed changes
   return html;
 }
 

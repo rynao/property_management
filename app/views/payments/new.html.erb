@@ -1,5 +1,6 @@
 <%= render 'layouts/header' %>
 
+<<<<<<< Updated upstream
 <div class='container mt-5'>
   <h3>支払い情報登録</h3>
   <%= form_with model:@payment, local: true do |f| %>
@@ -40,6 +41,58 @@
         <div>
           <%= f.radio_button :paid, '済' %>
           <%= f.label :paid_ok, "済" %>
+=======
+<div class='container mt-5 d-flex justify-content-center'>
+  <div class='card shadow px-5 py-3' style='max-width: 700px'>
+    <h3 class='mx-auto mt-3'>支払い情報登録</h3>
+    <%= form_with model:@payment, local: true do |f| %>
+      <div class='row g-3 py-5'>
+        <div class='property-area mb-3 row'>
+          <label class='col-md-3 form-label'>物件名称</label>
+          <div class='col-md-7'>
+            <select name='property_id', id ='property_id', class='form-control'>
+              <option value=''>選択してください</option>
+              <% current_user.property.all.each do |property| %>
+                <option value=<%= property.id %>><%= property.building %></option> 
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class='row mb-3', id="room-area">
+          <label class='col-md-3 form-label'>部屋</label>
+          <div class='col-md-7'>
+            <select name='room_id', id ='room-select', class='form-control'>
+              <option value=''>選択してください</option>
+              <% current_user.rooms.all.each do |room| %>
+                <option value=<%= room.id %>><%= room.name %></option> 
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class='row mb-3', id="contract-area">
+          <label class='col-md-3 form-label'>契約開始日</label>
+          <div class='col-md-7'>
+            <select name='contract_id', id ='contract_id', class='form-control'>
+              <option value=''>選択してください</option>
+              <% current_user.contracts.all.each do |contract| %>
+                <option value=<%= contract.id %>><%= contract.start_date %></option> 
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class='row mb-3'>
+          <label class='col-md-3 form-label'>支払い月</label>
+          <div class='col-md-7'>
+            <%= f.date_select :paid_date, {discard_day: true, start_year:2000}, class:'form-control' %>
+          </div>
+        </div>
+        <div class='row mb-3'>
+          <label class='col-md-3 form-label'>未納チェック</label>
+          <div class='col-md-7'>
+            <%= f.check_box :not_paid %>
+            <%= f.label :not_paid, "未" %>
+          </div>
+>>>>>>> Stashed changes
         </div>
         <div>
           <%= f.radio_button :rent, '未' %>
