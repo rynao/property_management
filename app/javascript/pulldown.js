@@ -12,24 +12,22 @@ function inputChangeRoom(event){
   XHR.responseType = "json";
   XHR.send();
   XHR.onload = () => {
-    const roomArea = document.getElementById("room-area");
-    roomArea.innerHTML = buildRoomHTML(XHR);
+    const roomSelect = document.getElementById("room-select");
+    roomSelect.innerHTML = buildRoomHTML(XHR);
   };
 };
 
 function buildRoomHTML(XHR) {
   const rooms = XHR.response.rooms;
+  let item = [];
   let items = [];
   rooms.forEach(room => {
     item = `<option value=${room.id}> ${room.name}</option>`;
+    items = items + item
+  });
+  const html = items;
+    item = `<option value=${room.id}> ${room.name}</option>`;
     items.push(item);
   });
-  const html = `
-    <label class='col-md-3 form-label'>部屋</label>
-    <div class='col-md-6'>
-      <select name='room_id', class='form-control'>
-      ${items}
-      </select>
-    </div`;
   return html;
 }
