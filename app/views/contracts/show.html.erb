@@ -6,20 +6,20 @@
     物件名称：<%= @contract.property.building %>
   </div>
   <div class='mb-3'>
-    部屋番号：<%= @contract.room.room_name %>
+    部屋番号：<%= @contract.room.name %>
   </div>
   <div class='mb-3'>
-    契約開始月：<%= @contract.start_date.strftime("%Y年%m月") %>
+    契約開始月：<%= @contract.start_date.strftime("%Y年%-m月%-d日") %>
   </div>
   <div class='mb-3'>
-    契約終了月：<%= @contract.end_date.strftime("%Y年%m月") %>
+    契約終了月：<%= @contract.end_date.strftime("%Y年%-m月%-d日") %>
   </div>
   <div class='mb-3'>
     家賃：<%= @contract.rent %>円
   </div>
   <div>
-    <%=link_to '編集', edit_contract_path %>
-    <%=link_to '削除', contract_path, method: :delete, data: {confirm: "削除しますか？"} %>
+    <%=link_to '編集', edit_contract_path, class:'btn btn-secondary' %>
+    <%=link_to '削除', contract_path, method: :delete, data: {confirm: "削除しますか？"}, class:'btn btn-secondary' %>
     <%=link_to '戻る', contracts_path %>
   </div>
 </div>
