@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_032037) do
+ActiveRecord::Schema.define(version: 2022_02_16_033141) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2022_02_11_032037) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_management_companies_on_user_id"
   end
 
   create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_02_11_032037) do
   add_foreign_key "contracts", "properties"
   add_foreign_key "contracts", "rooms"
   add_foreign_key "contracts", "users"
+  add_foreign_key "management_companies", "users"
   add_foreign_key "payments", "contracts"
   add_foreign_key "payments", "properties"
   add_foreign_key "payments", "rooms"
