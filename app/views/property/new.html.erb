@@ -3,7 +3,8 @@
 <div class='container mt-5 d-flex justify-content-center'>
   <div class='card shadow px-5 py-3' style='max-width: 800px'>
     <h3 class='mx-auto mt-3'>物件情報登録</h3>
-    <%= form_with model:@property, url:property_index_path, local: true do |f| %>
+    <%= form_with model:@property_management, url:property_index_path, local: true do |f| %>
+      <%= render 'layouts/error_messages', model: @property_management %>
       <div class='row g-3 py-5'>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>郵便番号</label>
@@ -17,19 +18,19 @@
             <%= f.text_field :prefecture, class:'form-control', placeholder:'例：東京都' %>
           </div>
           <label class='col-md-2 form-label'>市・区</label>
-          <div class='col-md-4'>
+          <div class='col-md-3'>
             <%= f.text_field :city, class:'form-control', placeholder:'例：台東区' %>
           </div>
         </div>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>町名番地</label>
-          <div class='col-md-9'>
+          <div class='col-md-8'>
             <%= f.text_field :address_line, class:'form-control', placeholder:'例：谷中1-2-3' %>
           </div>
         </div>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>物件名称</label>
-          <div class='col-md-6'>
+          <div class='col-md-8'>
             <%= f.text_field :building, class:'form-control', placeholder:'例：谷中パークハイツ' %>
           </div>
         </div>
@@ -40,7 +41,7 @@
           </div>
           <label class='col-md-2 form-label'>築年月</label>
           <div class='col-md-3'>
-            <%= f.date_select :building_year, {discard_day: true, start_year:1950}, class:'form-control', placeholder:'' %>
+            <%= f.date_field :building_year, class:'form-control' %>
           </div>
         </div>
         <div class='row mb-4'>
@@ -61,6 +62,34 @@
           <label class='col-md-2 form-label'>所有者</label>
           <div class='col-md-3'>
             <%= f.select :business_entity, ["法人","個人"], {include_blank: '選択してください'}, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class='row mb-4'>
+          <label class='col-md-2 form-label'>管理会社</label>
+          <div class='col-md-8'>
+            <%= f.text_field :name, class:'form-control', placeholder:'例：株式会社エイブル' %>
+          </div>
+        </div>
+        <div class='row mb-4'>        
+          <label class='col-md-2 form-label'>部署</label>
+          <div class='col-md-3'>
+            <%= f.text_field :department, class:'form-control', placeholder:'例：開発部' %>
+          </div>
+          <label class='col-md-2 form-label'>担当者</label>
+          <div class='col-md-3'>
+            <%= f.text_field :sales_person, class:'form-control', placeholder:'例：山田' %>
+          </div>
+        </div>
+        <div class='row mb-4'>
+          <label class='col-md-2 form-label'>連絡先</label>
+          <div class='col-md-8'>
+            <%= f.text_field :telephone, class:'form-control', placeholder:'例：090-1234-5678' %>
+          </div>
+        </div>
+        <div class='row mb-4'>
+          <label class='col-md-2 form-label'>メールアドレス</label>
+          <div class='col-md-8'>
+            <%= f.text_field :email, class:'form-control', placeholder:'例：test@mail.com' %>
           </div>
         </div>
         <div class='row my-3'>

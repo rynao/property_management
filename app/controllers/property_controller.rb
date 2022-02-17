@@ -28,12 +28,14 @@ class PropertyController < ApplicationController
   end
 
   def new
-    @property = Property.new
+    @property_management = PropertyCompany.new
   end
 
   def create
-    @property = Property.new(property_params)
-    if @property.save
+    binding.pry
+    @property_management = PropertyCompany.new(property_params)
+    if @property_management.valid?
+      @property_management.save
       redirect_to property_index_path
     else
       render :new
@@ -66,6 +68,6 @@ class PropertyController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area).merge(user_id: current_user.id)
+    params.require(:property_company).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area, :name, :department, :sales_person, :telephone, :email).merge(user_id: current_user.id)
   end
 end

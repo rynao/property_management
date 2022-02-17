@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_contracts
-    contracts = Contract.where(room_id: params[:room_id])
+    contracts = Contract.where(room_id: params[:room_id]).orer(end_date: "DESC")
     render json:{ contracts: contracts }
   end
 

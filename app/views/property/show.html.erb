@@ -31,7 +31,11 @@
     <tbody>
       <tr>
         <td><%= @property.total_units %></td>
-        <td><%= @property.building_year.strftime("%Y年%-m月") %></td>
+        <% unless @property.building_year.nil? %>
+          <td><%= @property.building_year.strftime("%Y年%-m月") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <% unless @property.land_area.nil? %>
           <td><%= @property.land_area %>㎡</td>
         <% else %>
