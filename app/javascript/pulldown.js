@@ -1,4 +1,5 @@
 window.addEventListener('load', function(){
+<<<<<<< Updated upstream
   
   const propertyId = document.getElementById('property_id');
   propertyId.addEventListener('change', inputChangeRoom);
@@ -6,6 +7,18 @@ window.addEventListener('load', function(){
   const roomId = document.getElementById('room_id');
   roomId.addEventListener('change', inputChangeContract);
 });
+=======
+  const propertyId1 = document.getElementById('property_id_1');
+  propertyId1.addEventListener('change', inputChangeRoom);
+});
+
+window.addEventListener('load', function(){
+  const propertyId2 = document.getElementById('property_id_2');
+  propertyId2.addEventListener('change', inputChangeRoom);
+});
+
+
+>>>>>>> Stashed changes
 
 function inputChangeRoom(event){
   const params = `property_id=${event.currentTarget.value}`;

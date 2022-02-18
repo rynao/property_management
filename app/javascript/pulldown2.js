@@ -8,8 +8,8 @@ window.addEventListener('load', function(){
     XHR.responseType = "json";
     XHR.send();
     XHR.onload = () => {
-      const contractArea = document.getElementById("contract-area");
-      contractArea.innerHTML = buildContractHTML(XHR);
+      const contractSelect = document.getElementById("contract-select");
+      contractSelect.innerHTML = buildContractHTML(XHR);
     };
   });
 
@@ -27,18 +27,13 @@ window.addEventListener('load', function(){
 
 function buildContractHTML(XHR) {
   const contracts = XHR.response.contracts;
+  let item = [];
   let items = [];
   contracts.forEach(contract => {
     item = `<option value=${contract.id}> ${contract.start_date}</option>`;
-    items.push(item);
+    items = items + item;
   });
-  const html = `
-    <label class='col-md-3 form-label'>契約開始日</label>
-    <div class='col-md-6'>
-      <select name='contract_id', class='form-control'>
-      ${items}
-      </select>
-    </div`;
+  const html = items;
   return html;
 };
 
@@ -50,7 +45,7 @@ function inputChangeContract(event){
   XHR.responseType = "json";
   XHR.send();
   XHR.onload = () => {
-    const contractArea = document.getElementById("contract-area");
-    contractArea.innerHTML = buildContractHTML(XHR);
+    const contractSelect = document.getElementById("contract-select");
+    contractSelect.innerHTML = buildContractHTML(XHR);
   };
 };

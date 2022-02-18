@@ -50,7 +50,7 @@
         <div class='property-area mb-3 row'>
           <label class='col-md-3 form-label'>物件名称</label>
           <div class='col-md-7'>
-            <select name='property_id', id ='property_id', class='form-control'>
+            <select name='property_id', id ='property_id_1', class='form-control'>
               <option value=''>選択してください</option>
               <% current_user.property.all.each do |property| %>
                 <option value=<%= property.id %>><%= property.building %></option> 
@@ -72,7 +72,7 @@
         <div class='row mb-3', id="contract-area">
           <label class='col-md-3 form-label'>契約開始日</label>
           <div class='col-md-7'>
-            <select name='contract_id', id ='contract_id', class='form-control'>
+            <select name='contract_id', id ='contract-select', class='form-control'>
               <option value=''>選択してください</option>
               <% current_user.contracts.all.each do |contract| %>
                 <option value=<%= contract.id %>><%= contract.start_date %></option> 
