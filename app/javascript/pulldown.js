@@ -1,8 +1,12 @@
-window.addEventListener('load', function(){
-  const propertyId = document.getElementById('property_id');
-  propertyId.addEventListener('change', inputChangeRoom);
+window.addEventListener('load', function(){ 
+  const propertyId1 = document.getElementById('property_id_1');
+  propertyId1.addEventListener('change', inputChangeRoom);
 });
 
+window.addEventListener('load', function(){
+  const propertyId2 = document.getElementById('property_id_2');
+  propertyId2.addEventListener('change', inputChangeRoom);
+});
 
 function inputChangeRoom(event){
   const params = `property_id=${event.currentTarget.value}`;

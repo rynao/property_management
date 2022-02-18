@@ -8,7 +8,7 @@
         <div class="property-area mb-3 row">
           <label class='col-md-3 col-form-label'>物件名称</label>
           <div class='col-md-7'>
-            <select name='property_id', id ='property_id', class='form-control'>
+            <select name='property_id', id ='property_id_2', class='form-control'>
               <option value=''>選択してください</option>
               <% current_user.property.all.each do |property| %>
                 <option value=<%= property.id %>><%= property.building %></option> 
@@ -19,7 +19,7 @@
         <div class="row mb-3", id="room-area">
           <label class='col-md-4 form-label'>部屋</label>
           <div class='col-md-4'>
-            <select name='room_id', id ='room_id', class='form-control'>
+            <select name='room_id', id ='room-select', class='form-control'>
               <option value=''>選択してください</option>
               <% current_user.rooms.all.each do |room| %>
                 <option value=<%= room.id %>><%= room.name %></option> 
