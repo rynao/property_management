@@ -10,11 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_contracts
-<<<<<<< Updated upstream
-    contracts = Contract.where(room_id: params[:room_id])
-=======
     contracts = Contract.where(room_id: params[:room_id]).order(end_date: "DESC")
->>>>>>> Stashed changes
     render json:{ contracts: contracts }
   end
 

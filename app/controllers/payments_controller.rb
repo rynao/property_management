@@ -14,8 +14,23 @@ class PaymentsController < ApplicationController
     # @summary = smr.to_a
 
     @payments = Payment.joins(:property, :contract, :user)
-                .where(user_id: current_user.id)
-                .group('building').group('paid_date').sum('contracts.rent')
+                .where(user_id: current_user.id).order(:paid_date)
+                .group('paid_date').sum('contracts.rent')
+                
+
+    @month_payments = Payment.joins(:property, :contract, :user)
+                      .where(user_id: current_user.id, paid_date: Time.now.all_month)
+                      .group('building').sum('contracts.rent')
+
+    gon.month_labels = @month_payments.map{|p|p[0]}
+    gon.month_data = @month_payments.map{|p|p[1]}
+
+    gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
+    gon.all_data = @payments.map{|p|p[1]}
+
+    @index = Payment.joins(:property, :contract, :user)
+    .where(user_id: current_user.id).order(paid_date: :DESC).order(:building)
+
   end
 
   def new
@@ -26,7 +41,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
-      redirect_to payment_path(@payment.id)
+      redirect_to payments_path
     else
       render :new
     end
@@ -40,7 +55,7 @@ class PaymentsController < ApplicationController
 
   def update
     if @payment.update(payment_params)
-      redirect_to payment_path(@payment.id)
+      redirect_to payments_path
     else
       render :edit
     end
@@ -61,6 +76,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :paid).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
+    params.require(:payment).permit(:paid_date, :not_paid).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
   end
 end

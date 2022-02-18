@@ -2,7 +2,10 @@ class RoomsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rooms = current_user.rooms.includes(:property)
+    @rooms = Room.joins(:property, :user)
+                  .where(user_id: current_user.id)
+                  .order("properties.building")
+                  .order("rooms.name")
   end
 
   def new
@@ -13,7 +16,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to "/property/#{@room.property.id}"
+      redirect_to property_path(@room.property.id)
     else
       render :new
     end
@@ -28,7 +31,7 @@ class RoomsController < ApplicationController
 
   def update  
     if @room.update(room_params)
-      redirect_to property_room_path(@room.id)
+      redirect_to property_path(@room.property.id)
     else
       render :edit
     end
@@ -49,7 +52,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:room_name).merge(property_id: params[:property_id], user_id: current_user.id)
+    params.require(:room).permit(:name, :layout, :room_size, :direction).merge(property_id: params[:property_id], user_id: current_user.id)
   end
 
 end
