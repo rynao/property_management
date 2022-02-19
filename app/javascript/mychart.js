@@ -48,7 +48,7 @@ window.addEventListener('load', function(){
                 label: '稼働状況',
                 data: [percentage, 100 - percentage],
                 backgroundColor: ['RGB(68,114,196)','rgba(0, 0, 0, 0)'],
-                cutout:'50%',
+                cutout:'70%',
             }]
         },
     });

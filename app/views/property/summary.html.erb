@@ -1,28 +1,25 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-  <div class='row g-3 my-3'>
-      <h4>家賃</h4>
+  <div class='row g-3 my-2'>
+    <div class='col-md-4'>
+      <h4 class='text-center bg-light py-2'>稼働状況</h4>
+        <div class='px-5 dounut-chart'>
+          <canvas id="vacancyChart"></canvas>
+          <p><%= @occupant_rooms.count %> / <%= Room.all.count%>戸</p>
+        </div>
+    </div>
+      <h4 class='text-center bg-light py-2'>家賃</h4>
       <div class='d-flex mb-3'>
-        <div class='col-md-6 px-2'>
+        <div class='col-md-6 px-4'>
           <h5>今月</h5>
           <canvas id="monthChart"></canvas>
         </div>
-        <div class='col-md-6 px-2'>
+        <div class='col-md-6 px-4'>
           <h5>累計</h5>
           <canvas id="allChart"></canvas>
         </div>
       </div>
-      <h4>稼働状況</h4>
-      <div class='d-flex'>
-        <div class='col-md-6 px-2'>
-          <h5>今月</h5>
-          <canvas id="vacancyChart"></canvas>
-        </div>
-        <div class='col-md-6 px-2'>
-          <h5>累計</h5>
-          <canvas id="vacancyChart"></canvas>
-        </div>
-      </div>
+      
     </div>
   </div>

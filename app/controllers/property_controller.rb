@@ -16,8 +16,8 @@ class PropertyController < ApplicationController
     gon.month_labels = @month_payments.map{|p|p[0]}
     gon.month_data = @month_payments.map{|p|p[1]}
 
-    occupant_rooms = Room.joins(:contracts).where(user_id: current_user.id).where(Contract.arel_table[:end_date].gteq Date.today)
-    gon.occupancy_rate = ((occupant_rooms.count.to_f / Room.all.count.to_f)*100).round(2)
+    @occupant_rooms = Room.joins(:contracts).where(user_id: current_user.id).where(Contract.arel_table[:end_date].gteq Date.today)
+    gon.occupancy_rate = ((@occupant_rooms.count.to_f / Room.all.count.to_f)*100).round(2)
   end
 
   def index
