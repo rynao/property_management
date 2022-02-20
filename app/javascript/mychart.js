@@ -5,9 +5,8 @@ window.addEventListener('load', function(){
         data: {
             labels: gon.month_labels,
             datasets: [{
-                label: '家賃推移',
                 data: gon.month_data,
-                backgroundColor: 'RGB(68,114,196)',
+                backgroundColor: '#A7D9D5',
             }]
         },
         options: {
@@ -15,6 +14,9 @@ window.addEventListener('load', function(){
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                legend: false
             }
         }
     });
@@ -25,9 +27,8 @@ window.addEventListener('load', function(){
         data: {
             labels: gon.all_labels,
             datasets: [{
-                label: '家賃推移',
                 data: gon.all_data,
-                backgroundColor: 'RGB(68,114,196)',
+                backgroundColor: '#24205E',
             }]
         },
         options: {
@@ -35,6 +36,9 @@ window.addEventListener('load', function(){
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                legend: false
             }
         }
     });
@@ -47,8 +51,8 @@ window.addEventListener('load', function(){
             datasets: [{
                 label: '稼働状況',
                 data: [percentage, 100 - percentage],
-                backgroundColor: ['RGB(68,114,196)','rgba(0, 0, 0, 0)'],
-                cutout:'50%',
+                backgroundColor: ['#365596','rgba(0, 0, 0, 0)'],
+                cutout:'70%',
             }]
         },
     });
