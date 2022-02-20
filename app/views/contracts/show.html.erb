@@ -18,8 +18,8 @@
     家賃：<%= @contract.rent %>円
   </div>
   <div>
-    <%=link_to '編集', edit_contract_path, class:'btn btn-secondary' %>
-    <%=link_to '削除', contract_path, method: :delete, data: {confirm: "削除しますか？"}, class:'btn btn-secondary' %>
+    <%=link_to '編集', edit_contract_path, class:'btn btn-primary' %>
+    <%=link_to '削除', contract_path, method: :delete, data: {confirm: "削除しますか？"}, class:'btn btn-primary' %>
     <%=link_to '戻る', contracts_path %>
   </div>
 </div>

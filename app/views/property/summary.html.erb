@@ -1,25 +1,60 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-  <div class='row g-3 my-2'>
-    <div class='col-md-4'>
+  <div class='row g-3 my-3', style='max-height: 50%'>
+    <div class='col-md-6 d-flex flex-wrap mx-3'>
+      <div class='col-md-6'>
+        <div class='card shadow text-center mx-4 my-5'>
+          <div class='card-body'>
+            <h5 class='card-title'>今月収入</h5>
+            <div class='card-text fw-bold fs-3' style='color:#365596'><%= @monthly_income.to_s(:currency, locale: 'jp') %></div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div class='card shadow text-center mx-4 my-5'>
+          <div class='card-body'>
+            <h5 class='card-title'>契約更新対象</h5>
+            <div class='card-text fw-bold fs-3' style='color:#365596'><%= @renew_contract %>件</div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div class='card shadow text-center mx-4 my-5'>
+          <div class='card-body'>
+            <h5 class='card-title'>今月未納</h5>
+            <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid %>件</div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div class='card shadow text-center mx-4 my-5'>
+          <div class='card-body'>
+            <h5 class='card-title'>累計未納</h5>
+            <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid_all %>件</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col vacancy-area mx-3'>
       <h4 class='text-center bg-light py-2'>稼働状況</h4>
-        <div class='px-5 dounut-chart'>
+        <div class='px-5 py-4 dounut-chart'>
           <canvas id="vacancyChart"></canvas>
           <p><%= @occupant_rooms.count %> / <%= Room.all.count%>戸</p>
         </div>
     </div>
-      <h4 class='text-center bg-light py-2'>家賃</h4>
-      <div class='d-flex mb-3'>
-        <div class='col-md-6 px-4'>
-          <h5>今月</h5>
-          <canvas id="monthChart"></canvas>
-        </div>
-        <div class='col-md-6 px-4'>
-          <h5>累計</h5>
-          <canvas id="allChart"></canvas>
-        </div>
+  </div>
+  <div class='row g-3 my-2'>
+    <h4 class='text-center bg-light py-2'>家賃</h4>
+    <div class='d-flex my-3'>
+      <div class='col-md-6 px-4 mt-3 mx-2 text-center'>
+        <h5>今月</h5>
+        <canvas id="monthChart"></canvas>
       </div>
-      
+      <div class='col-md-6 px-4 mt-3 mx-2 text-center'>
+        <h5>累計</h5>
+        <canvas id="allChart"></canvas>
+      </div>
     </div>
+  </div>
   </div>
