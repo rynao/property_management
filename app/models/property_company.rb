@@ -28,9 +28,9 @@ class PropertyCompany
     validates :business_entity
     validates :user_id
   end
-  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'は###-####（半角）の形式で入力してください'}
+  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'は###-####（半角）の形式で入力してください'}, allow_blank: true
   validates :total_units, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: 'は1以上の半角整数で入力してください'}, allow_blank: true
-  validates :telephone, format: {with: /\A\d{10,11}\z/, message: 'は10~11桁の半角数字で入力してください'}
+  validates :telephone, format: {with: /\A\d{10,11}\z/, message: 'は10~11桁の半角数字で入力してください'}, allow_blank: true
   validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: 'は有効なメールアドレス形式で入力してください'}, allow_blank: true
 
   def save

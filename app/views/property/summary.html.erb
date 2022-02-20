@@ -40,7 +40,7 @@
       <h4 class='text-center bg-light py-2'>稼働状況</h4>
         <div class='px-5 py-4 dounut-chart'>
           <canvas id="vacancyChart"></canvas>
-          <p><%= @occupant_rooms.count %> / <%= Room.all.count%>戸</p>
+          <p class='room-count'><%= @occupant_rooms.count %> / <%= Room.all.count%>戸</p>
         </div>
     </div>
   </div>
