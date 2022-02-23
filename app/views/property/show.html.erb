@@ -63,33 +63,43 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% unless @property.management_company.name.nil? %>
-          <td><%= @property.management_company.name %></td>
-        <% else %>
+      <% unless @property.management_company.nil? %>
+        <tr>
+          <% unless @property.management_company.name.nil? %>
+            <td><%= @property.management_company.name %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% unless @property.management_company.department.nil? %>
+            <td><%= @property.management_company.department %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% unless @property.management_company.sales_person.nil? %>
+            <td><%= @property.management_company.sales_person %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% unless @property.management_company.telephone.nil? %>
+            <td><%= @property.management_company.telephone %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% unless @property.management_company.email.nil? %>
+            <td><%= @property.management_company.email %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr>
           <td></td>
-        <% end %>
-        <% unless @property.management_company.department.nil? %>
-          <td><%= @property.management_company.department %></td>
-        <% else %>
           <td></td>
-        <% end %>
-        <% unless @property.management_company.sales_person.nil? %>
-          <td><%= @property.management_company.sales_person %></td>
-        <% else %>
           <td></td>
-        <% end %>
-        <% unless @property.management_company.telephone.nil? %>
-          <td><%= @property.management_company.telephone %></td>
-        <% else %>
           <td></td>
-        <% end %>
-        <% unless @property.management_company.email.nil? %>
-          <td><%= @property.management_company.email %></td>
-        <% else %>
           <td></td>
-        <% end %>
-      </tr>
+        </tr>
+      <% end %>
     </tbody>
   </table>
   <div class='' style="margin-top:100px;">
