@@ -33,12 +33,66 @@ class PropertyCompany
   validates :telephone, format: {with: /\A\d{10,11}\z/, message: 'は10~11桁の半角数字で入力してください'}, allow_blank: true
   validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: 'は有効なメールアドレス形式で入力してください'}, allow_blank: true
 
+  # delegate :persisted?, to: :property
+
+  def initialize(attributes = nil, property: Property.new)
+    @property = property
+    if @property.management_company.nil?
+      attributes ||= default_attributes_1
+    else
+      attributes ||= default_attributes_2
+    end
+    super(attributes)
+  end
+
   def save
-    unless :name.present?
+    if :name.present?
       management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
       Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id, management_company_id: management.id)
     else
       Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id)
     end
   end
+
+  private
+
+  def default_attributes_1
+    {
+    postal_code: @property.postal_code,
+    prefecture: @property.prefecture,
+    city: @property.city,
+    address_line: @property.address_line,
+    building: @property.building,
+    total_units: @property.total_units,
+    building_year: @property.building_year,
+    property_type: @property.property_type,
+    business_entity: @property.business_entity,
+    land_area: @property.land_area,
+    building_area: @property.building_area,
+    user_id: @property.user_id,
+    }
+  end
+
+  def default_attributes_2
+    {
+    postal_code: @property.postal_code,
+    prefecture: @property.prefecture,
+    city: @property.city,
+    address_line: @property.address_line,
+    building: @property.building,
+    total_units: @property.total_units,
+    building_year: @property.building_year,
+    property_type: @property.property_type,
+    business_entity: @property.business_entity,
+    land_area: @property.land_area,
+    building_area: @property.building_area,
+    user_id: @property.user_id,
+    name: @property.management_company.name,
+    department: @property.management_company.department,
+    sales_person: @property.management_company.sales_person,
+    telephone: @property.management_company.telephone,
+    email: @property.management_company.email
+    }
+  end
+
 end
