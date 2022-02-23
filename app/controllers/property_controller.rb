@@ -1,5 +1,5 @@
 class PropertyController < ApplicationController
-  before_action :find_params, only: [:show, :destroy]
+  before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def summary
     @payments = Payment.joins(:property, :contract, :user)
@@ -49,13 +49,13 @@ class PropertyController < ApplicationController
   end
 
   def new
-    @property_management = PropertyCompany.new
+    @property_company = PropertyCompany.new
   end
 
   def create
-    @property_management = PropertyCompany.new(property_params)
-    if @property_management.valid?
-      @property_management.save
+    @property_company = PropertyCompany.new(property_params)
+    if @property_company.valid?
+      @property_company.save
       redirect_to property_index_path
     else
       render :new
@@ -63,15 +63,14 @@ class PropertyController < ApplicationController
   end
 
   def edit
-    @property_management = PropertyCompany.find(property_params)
+    @property_company = PropertyCompany.new(property: @property)
   end
 
   def update
-    @property_management = PropertyCompany.find(property_params)
-    if @property_management.valid?
-      @property_management.save
-    # if @property.update(property_params)
-      redirect_to property_path(@property.id)
+    @property_company = PropertyCompany.new(property_params, property: @property)
+    if @property_company.valid?
+      @property_company.save
+      redirect_to @property
     else
       render :edit
     end

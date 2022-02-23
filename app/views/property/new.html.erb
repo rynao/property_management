@@ -3,8 +3,8 @@
 <div class='container mt-5 d-flex justify-content-center'>
   <div class='card shadow px-5 py-3' style='max-width: 800px'>
     <h3 class='mx-auto mt-3'>物件情報登録</h3>
-    <%= form_with model:@property_management, url:property_index_path, local: true do |f| %>
-      <%= render 'layouts/error_messages', model: @property_management %>
+    <%= form_with model:@property_company, url:property_index_path, local: true do |f| %>
+      <%= render 'layouts/error_messages', model: @property_company %>
       <div class='row g-3 py-5'>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>郵便番号</label>
