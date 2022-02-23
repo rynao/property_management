@@ -64,7 +64,11 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @property.management_company.name %></td>
+        <% unless @property.management_company.name.nil? %>
+          <td><%= @property.management_company.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <% unless @property.management_company.department.nil? %>
           <td><%= @property.management_company.department %></td>
         <% else %>
