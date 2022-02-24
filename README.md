@@ -1,24 +1,14 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|                                               |                                                                                                                                                                                                                                                                                                                                              | 
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| アプリケーション名                            | Property Management                                                                                                                                                                                                                                                                                                                          | 
+| アプリケーション概要                          | 大家さんのための家賃・契約管理アプリケーション                                                                                                                                                                                                                                                                                               | 
+| URL                                           | https://property-management0202.herokuapp.com/                                                                                                                                                                                                                                                                                               | 
+| テスト用アカウント                            | メールアドレス：testmail@gmail.com<br>パスワード：123456                                                                                                                                                                                                                                                                                     | 
+| 利用方法                                      | 1. トップページからユーザー新規登録を行う。<br>2. 「物件管理」から物件情報を登録する。<br>3. 物件の詳細ページから物件に紐付く部屋情報を登録する。<br>4. 「契約管理」から各部屋の契約情報を登録する。<br>5. 「家賃管理」から毎月の家賃の支払い状況を登録する。<br>6. トップページで支払い状況・収入金額・契約更新件数を確認することができる。 | 
+| アプリケーションを作成した背景                | 大家さんの友人が、家賃や契約の管理が煩雑で困っており、一目で収入状況や契約更新対象がわかるアプリケーションを求めていたため。                                                                                                                                                                                                                 | 
+| 実装した機能についての画像やGIFおよびその説明 | [![Image from Gyazo](https://i.gyazo.com/963388ebe90dec71968c1de4a84b4acd.png)](https://gyazo.com/963388ebe90dec71968c1de4a84b4acd)                                                                                                                                                                                                          | 
+| 実装予定の機能                                | 家賃支払い情報および部屋情報の一括登録機能                                                                                                                                                                                                                                                                                                   | 
+| データベース設計                              | [![Image from Gyazo](https://i.gyazo.com/0c62c90bf862fc7ea23be26af89b0cfb.png)](https://gyazo.com/0c62c90bf862fc7ea23be26af89b0cfb)                                                                                                                                                                                                          | 
+| 開発環境                                      | ・フロントエンド：HTML,CSS / JavaScript<br>・バックエンド：Ruby（ver 2.5.1）/ Ruby on Rails（ver 6.0.4）<br>・インフラ：MySQL<br>・テスト：RSpec<br>・テキストエディタ：Visual Studio Code<br>・タスク管理：GitHub                                                                                                                           | 
+| ローカルでの動作方法                          | 以下、コマンドを順に実行してください。<br>% git clone https://github.com/rynao/property_management.git<br>% cd menu_record<br>% bundle install<br>% yarn install                                                                                                                                                                             | 
+| 工夫したポイント                              | トップページで収入状況・契約更新対象が一目でわかるようにした点<br>契約情報登録および家賃支払い情報登録時に、物件を選択するとその物件に紐付く部屋情報のみが表示されるように、プルダウンを動的に連動させた点                                                                                                                                   | 
