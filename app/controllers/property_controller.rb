@@ -69,7 +69,7 @@ class PropertyController < ApplicationController
   def update
     @property_company = PropertyCompany.new(property_params, property: @property)
     if @property_company.valid?
-      @property_company.save
+      @property_company.update
       redirect_to @property
     else
       render :edit
@@ -91,6 +91,6 @@ class PropertyController < ApplicationController
   end
 
   def property_params
-    params.require(:property_company).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area, :name, :department, :sales_person, :telephone, :email).merge(user_id: current_user.id)
+    params.require(:property_company).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area, :name, :department, :sales_person, :telephone, :email).merge(user_id: current_user.id, management_company_id: params[:management_company_id], property_id: params[:id])
   end
 end

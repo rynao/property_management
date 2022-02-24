@@ -18,7 +18,9 @@ class PropertyCompany
     :department,
     :sales_person,
     :telephone,
-    :email
+    :email,
+    :management_company_id,
+    :property_id
   )
   
   with_options presence: true do
@@ -51,6 +53,19 @@ class PropertyCompany
       Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id, management_company_id: management.id)
     else
       Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id)
+    end
+  end
+
+  def update
+    if :management_company_id.present?
+      management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
+      property = Property.find(property_id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
+    else
+      management = ManagementCompany.find(management_company_id)
+      management.update(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
+      property = Property.find(property_id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
     end
   end
 
@@ -91,7 +106,8 @@ class PropertyCompany
     department: @property.management_company.department,
     sales_person: @property.management_company.sales_person,
     telephone: @property.management_company.telephone,
-    email: @property.management_company.email
+    email: @property.management_company.email,
+    management_company_id: @property.management_company_id
     }
   end
 
