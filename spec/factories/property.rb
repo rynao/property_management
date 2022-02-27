@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :property do
-    post_code { Faker::Address.zip }
+    postal_code { Faker::Address.zip }
     prefecture { '神奈川県' }
     city { Faker::Address.city }
     address_line { Faker::Address.street_address }
