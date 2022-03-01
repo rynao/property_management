@@ -1,6 +1,6 @@
 class Payment < ApplicationRecord
   validates :paid_date, presence: true
-  # validates :paid, inclusion: [true, false]
+  validates :amounts, presence: true
 
   belongs_to :user
   belongs_to :property

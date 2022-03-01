@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
     render json:{ contracts: contracts }
   end
 
+  def get_amounts
+    contract = Contract.find(params[:contract_id])
+    render json:{ amounts: contract.rent }
+  end
+
   private
 
   def configure_permitted_parameters

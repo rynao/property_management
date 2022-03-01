@@ -15,11 +15,11 @@
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>都道府県</label>
           <div class='col-md-3'>
-            <%= f.text_field :prefecture, class:'form-control', placeholder:'例：東京都' %>
+            <%= f.text_field :prefecture, class:'form-control', placeholder:'例：東京都', required: true %>
           </div>
           <label class='col-md-2 form-label'>市・区</label>
           <div class='col-md-3'>
-            <%= f.text_field :city, class:'form-control', placeholder:'例：台東区' %>
+            <%= f.text_field :city, class:'form-control', placeholder:'例：台東区', required: true %>
           </div>
         </div>
         <div class='row mb-4'>
@@ -31,7 +31,7 @@
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>物件名称</label>
           <div class='col-md-8'>
-            <%= f.text_field :building, class:'form-control', placeholder:'例：谷中パークハイツ' %>
+            <%= f.text_field :building, class:'form-control', placeholder:'例：谷中パークハイツ', required: true %>
           </div>
         </div>
         <div class='row mb-4'>
@@ -61,7 +61,7 @@
           </div>
           <label class='col-md-2 form-label'>所有者</label>
           <div class='col-md-3'>
-            <%= f.select :business_entity, ["法人","個人"], {include_blank: '選択してください'}, {class: 'form-control'} %>
+            <%= f.select :business_entity, ["法人","個人"], {include_blank: '選択してください'}, {required: true, class: 'form-control'} %>
           </div>
         </div>
         <div class='row mb-4'>

@@ -2,14 +2,14 @@ class PaymentsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @payments = Payment.joins(:property, :contract, :user)
+    @payments = Payment.joins(:property, :user)
                 .where(user_id: current_user.id).order(:paid_date)
-                .group('paid_date').sum('contracts.rent')
+                .group('paid_date').sum('amounts')
                 
 
-    @month_payments = Payment.joins(:property, :contract, :user)
+    @month_payments = Payment.joins(:property, :user)
                       .where(user_id: current_user.id, paid_date: Time.now.all_month)
-                      .group('building').sum('contracts.rent')
+                      .group('building').sum('amounts')
 
     gon.month_labels = @month_payments.map{|p|p[0]}
     gon.month_data = @month_payments.map{|p|p[1]}
@@ -65,6 +65,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :not_paid).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
+    params.require(:payment).permit(:paid_date, :not_paid, :amounts).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
   end
 end

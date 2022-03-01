@@ -43,7 +43,7 @@
               <td><%= payment.paid_date.strftime("%Y年%m月") %></td>
               <td><%= payment.property.building %></td>
               <td><%= payment.room.name %></td>
-              <td><%= payment.contract.rent.to_s(:currency, locale: 'jp') %></td>
+              <td><%= payment.amounts.to_s(:currency, locale: 'jp') %></td>
               <% if payment.not_paid %>
                 <td style="color:red;">未納</td>
               <% else %>
