@@ -8,7 +8,6 @@ const calcEndDate = () => {
     date.setFullYear(date.getFullYear() + Number(year.value));
     date.setDate(date.getDate()-1)
     end_date.value = date.toISOString().split('T')[0];
-    console.log(end_date.value)
   });
 };
 

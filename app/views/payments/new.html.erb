@@ -39,6 +39,12 @@
           </div>
         </div>
         <div class='row mb-3'>
+          <label class='col-md-3 form-label'>金額</label>
+          <div class='col-md-7'>
+            <%= f.text_field :amounts, class:'form-control', id:'amounts', required: true %>
+          </div>
+        </div>
+        <div class='row mb-3'>
           <label class='col-md-3 form-label'>支払い月</label>
           <div class='col-md-7'>
             <%= f.date_select :paid_date, {discard_day: true, start_year:2000}, class:'form-control' %>
