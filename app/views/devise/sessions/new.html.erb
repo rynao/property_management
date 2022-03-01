@@ -5,11 +5,11 @@
       <%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
         <div class="mb-3">
           <%= f.label 'メールアドレス', class:'form-label' %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control ' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', required: true %>
         </div>
         <div class="mb-3">
           <%= f.label 'パスワード', class:'form-label' %><br />
-          <%= f.password_field :password, autocomplete: "current-password", class:'form-control ' %>
+          <%= f.password_field :password, autocomplete: "current-password", class:'form-control', required: true %>
         </div>
         <div class="mb-3">
           <%= f.submit "ログイン",class:'btn btn-primary' %>
