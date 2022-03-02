@@ -10,13 +10,14 @@ class RoomsController < ApplicationController
 
   def new
     @property = Property.find(params[:property_id])
-    @room = Room.new
+    @form = Form::RoomCollection.new
   end
 
   def create
-    @room = Room.new(room_params)
-    if @room.save
-      redirect_to property_path(@room.property.id)
+    @property = Property.find(params[:property_id])
+    @form = Form::RoomCollection.new(room_collection_params)
+    if @form.save
+      redirect_to property_path(@property.id)
     else
       render :new
     end
@@ -52,7 +53,15 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name, :layout, :room_size, :direction).merge(property_id: params[:property_id], user_id: current_user.id)
+    params
+    .require(:room)
+    .permit(:name, :layout, :room_size, :direction)
+    .merge(property_id: params[:property_id], user_id: current_user.id)
   end
 
+  def room_collection_params
+    params
+      .require(:form_room_collection)
+      .permit(rooms_attributes:  [:name, :layout, :room_size, :direction, :property_id, :user_id])
+  end
 end
