@@ -1,5 +1,5 @@
 class Form::RoomCollection < Form::Base
-  FORM_COUNT = 10 #ここで、作成したい登録フォームの数を指定
+  FORM_COUNT = 1 #ここで、作成したい登録フォームの数を指定
   attr_accessor :rooms
 
   def initialize(attributes = {})

@@ -4,7 +4,7 @@
   <div class='card shadow px-5 py-3' style='max-width: 800px'>
     <h3 class='mx-auto mt-3'>部屋情報登録</h3>
       <h5 class='mt-3 mx-auto'><%= @property.building %></h5>
-      <%= form_with(model:@form, url: property_rooms_path, local: true) do |fb| %>
+      <%= form_with(model:@form, url: property_rooms_path, method: :post, local: true) do |f| %>
         <table class="table">
           <thead>
             <tr>
@@ -15,28 +15,31 @@
             </tr>
           </thead>
           <tbody class="bulk-registration-form">
-            <%= fb.fields_for :rooms do |f| %>
-              <tr class="item">
+            <%= f.fields_for :rooms do |room| %>
+              <tr class="item", id='rooms-form', data-name=<%= room.index %>>
                 <td>
-                <%= f.text_field :name, class: 'form-control', placeholder:'例：101', required: true %>
+                <%= room.text_field :name, class: 'form-control', placeholder:'例：101', required: true %>
                 </td>
                 <td>
-                <%= f.text_field :layout, class: 'form-control', placeholder:'例：1K' %>
+                <%= room.text_field :layout, class: 'form-control', placeholder:'例：1K' %>
                 </td>
                 <td>
-                <%= f.text_field :room_size, class: 'form-control', placeholder:'例：23.3' %>
+                <%= room.text_field :room_size, class: 'form-control', placeholder:'例：23.3' %>
                 </td>
                 <td>
-                <%= f.text_field :direction, class: 'form-control', placeholder:'例：南東' %>
+                <%= room.text_field :direction, class: 'form-control', placeholder:'例：南東' %>
                 </td>
-                <%= f.hidden_field :property_id, value: @property.id %>
-                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= room.hidden_field :property_id, value: @property.id, id:'room_property_id' %>
+                <%= room.hidden_field :user_id, value: current_user.id, id:'room_user_id' %>
               </tr>
             <% end %>
           </tbody>
         </table>
+        <div class='mx-auto col-md-4 text-center'>
+          <%= link_to '入力欄追加', '#', id:'add-form-btn' %>
+        </div>
         <div class='row my-4'>
-          <%= fb.submit "一括登録" ,class:'d-block mx-auto col-md-4 btn btn-primary' %>
+          <%= f.submit "一括登録" ,class:'d-block mx-auto col-md-4 btn btn-primary' %>
           <div class=' mt-3 d-flex justify-content-center'>
             <%=link_to 'もどる', property_path(@property.id), class:'' %>
           </div>
