@@ -15,7 +15,6 @@ require("../pulldown2")
 require("../contract_period")
 require("../amount")
 require("../add_room_form")
-require("../delete_room_form")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
