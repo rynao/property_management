@@ -24,8 +24,8 @@ class PaymentsController < ApplicationController
 
   def new
     # @payment = Payment.new
+    @contracts = current_user.contracts.all
     @form = Form::PaymentCollection.new
-
   end
 
   def create
