@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
     render json:{ amounts: contract.rent }
   end
 
+  def get_copy_contracts
+    @contracts = Contract.where(id: params[:id].split(','))
+    partial = render_to_string(partial:'payments/copy_payments_form', :locals => { contracts: @contracts })
+    # render json:{ contracts: contracts }
+    render json:{partial: partial}
+    # render partial: 'payments/payments_form', locals: {form: @contracts}
+  end
+
   private
 
   def configure_permitted_parameters

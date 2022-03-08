@@ -23,13 +23,20 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    @payment = Payment.new
-
+    # @payment = Payment.new
+    @contracts = current_user.contracts.all
+    @form = Form::PaymentCollection.new
   end
 
   def create
-    @payment = Payment.new(payment_params)
-    if @payment.save
+    # @payment = Payment.new(payment_params)
+    # if @payment.save
+    #   redirect_to payments_path
+    # else
+    #   render :new
+    # end
+    @form = Form::PaymentCollection.new(payment_collection_params)
+    if @form.save
       redirect_to payments_path
     else
       render :new
@@ -66,5 +73,9 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:paid_date, :not_paid, :amounts).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
+  end
+
+  def payment_collection_params
+    params.permit(payments: [:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id, :user_id])
   end
 end
