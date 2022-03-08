@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get 'get_rooms', to: 'application#get_rooms'
   get 'get_contracts', to: 'application#get_contracts'
   get 'get_amounts', to: 'application#get_amounts'
+  get 'get_copy_contracts', to: 'application#get_copy_contracts'
 end

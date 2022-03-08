@@ -1,5 +1,5 @@
 class Form::PaymentCollection < Form::Base
-  FORM_COUNT = 2 #ここで、作成したい登録フォームの数を指定
+  FORM_COUNT = 1 #ここで、作成したい登録フォームの数を指定
   attr_accessor :payments
 
   def initialize(attributes = {})

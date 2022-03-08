@@ -78,6 +78,6 @@ class PaymentsController < ApplicationController
   def payment_collection_params
     params
       .require(:form_payment_collection)
-      .permit(payments_attributes:  [:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id, :user_id])
+      .permit(payments_attributes: [:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id, :user_id])
   end
 end
