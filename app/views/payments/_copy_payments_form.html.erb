@@ -1,4 +1,4 @@
-<%= form_with(model: form, url: payments_path, method: :post, local: true) do |f|%>
+<%= form_with(url: payments_path, method: :post, local: true) do |f|%>
   <table class="table">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
     </thead>
     <tbody class="bulk-registration-form">
       <% contracts.each do |payment|%>
-        <%= fields_for "payments_attributes[]", payment do |p|%>
+        <%= fields_for "payments[]", payment do |p|%>
           <tr class="item", id='payments-form', data-name=<%= p.index %>>
             <td>
               <%= p.text_field :property_id, class:'form-control', value: payment.property.id, required: true %><%= payment.property.building %>

@@ -21,13 +21,7 @@ class ApplicationController < ActionController::Base
 
   def get_copy_contracts
     @contracts = Contract.where(id: params[:id].split(','))
-    forms = []
-    @contracts.length.times do
-      form = Form::PaymentCollection.new
-      forms << form
-    end
-    binding.pry
-    partial = render_to_string(partial:'payments/copy_payments_form', :locals => { contracts: @contracts, form: @form })
+    partial = render_to_string(partial:'payments/copy_payments_form', :locals => { contracts: @contracts })
     # render json:{ contracts: contracts }
     render json:{partial: partial}
     # render partial: 'payments/payments_form', locals: {form: @contracts}
