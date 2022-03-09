@@ -3,7 +3,6 @@
 <div class='container mt-5'>
   <div class='card shadow px-5 py-3 d-flex flex-nowrap'>
     <h3 class='mx-auto mt-3'>支払い情報登録</h3>
-    <div>
       <table class="table">
         <thead>
           <tr>
@@ -12,30 +11,31 @@
             </th>
             <th>物件名称</th>
             <th>部屋</th>
-            <th>契約開始日</th>
-            <th>契約終了日</th>
             <th>金額</th>
+            <th>未納チェック</th>
           </tr>
         </thead>
         <tbody>
-          <% @contracts.each do |f| %>
-            <tr>
-              <td><input type='checkbox' class='check' value=<%= f.id %>></td>
-              <td><%= f.property.building %></td>
-              <td><%= f.room.name %></td>
-              <td><%= f.start_date %></td>
-              <td><%= f.end_date %></td>
-              <td><%= f.rent.to_s(:currency, locale: 'jp') %></td>
-            </tr>
+          <%= form_with(model:@form, url: payments_path, method: :post, local: true) do |payments| %>
+            <% @contracts.each do |f| %>
+              <%= payments.fields_for :payments do |p|%>
+                <tr>
+                  <td><input type='checkbox' class='check form-check-input' value=<%= f.id %>></td>
+                  <td><%= p.select :property_id, { f.property.building => f.property_id },{selected: f.property_id},{ class: 'form-control', required: true, readonly: true } %></td>
+                  <td><%= p.select :room_id, { f.room.name => f.room_id },{selected: f.room_id},{ class: 'form-control', required: true, readonly: true } %></td>
+                  <td><%= p.text_field :amounts, value: f.rent, class: 'form-control', required: true %></td>
+                  <td><%= p.check_box :not_paid, { class: 'form-check-input'} %></td>
+                </tr>
+              <% end %>
+            <% end %>
+            <div class='row my-3'>
+              <%= payments.submit "登録" ,class:'d-block mx-auto col-md-4 btn btn-primary' %>
+              <div class=' mt-3 d-flex justify-content-center'>
+                <%=link_to 'もどる', payments_path, class:'' %>
+              </div>
+            </div>
           <% end %>
         </tbody>
       </table>
-    </div>
-    <div>
-      <input type='button' id='copy_btn' value='コピー' class='mt-3'>
-    </div>
-    <div class='mt-5' id='copy_contracts_data'>
-      <%= render 'payments_form', form: @form %>
-    </div>
   </div>
 </div>

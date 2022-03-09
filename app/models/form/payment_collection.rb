@@ -18,5 +18,5 @@ class Form::PaymentCollection < Form::Base
       return true
     rescue => e
       return false
-  end
+    end
 end
