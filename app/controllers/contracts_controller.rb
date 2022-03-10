@@ -2,11 +2,13 @@ class ContractsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @contracts = current_user.contracts.includes(:property, :room)
+    @contracts = current_user.contracts.joins(:property, :room)
                               .where("end_date >= ?",Date.today)
+                              .order(:building).order(:name)
 
-    @old_contracts = current_user.contracts.includes(:property, :room)
+    @old_contracts = current_user.contracts.joins(:property, :room)
                               .where("end_date < ?",Date.today)
+                              .order(:building).order(:name)
   end
 
   def new
