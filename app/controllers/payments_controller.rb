@@ -2,39 +2,22 @@ class PaymentsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @payments = Payment.joins(:property, :user)
-                .where(user_id: current_user.id).order(:paid_date)
-                .group('paid_date').sum('amounts')
-                
-
-    @month_payments = Payment.joins(:property, :user)
-                      .where(user_id: current_user.id, paid_date: Time.now.all_month)
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
+    @building_payments = Payment.joins(:property, :user)
+                      .where(user_id: current_user.id, paid_date: @month.all_month)
                       .group('building').sum('amounts')
 
-    gon.month_labels = @month_payments.map{|p|p[0]}
-    gon.month_data = @month_payments.map{|p|p[1]}
-
-    gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
-    gon.all_data = @payments.map{|p|p[1]}
-
-    @index = Payment.joins(:property, :contract, :user)
-    .where(user_id: current_user.id).order(paid_date: :DESC).order(:building)
+    @all_payments = Payment.joins(:property, :room, :contract, :user)
+              .where(user_id: current_user.id, paid_date: @month.all_month).order(:building).order(:name)
 
   end
 
   def new
-    # @payment = Payment.new
     @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new
   end
 
   def create
-    # @payment = Payment.new(payment_params)
-    # if @payment.save
-    #   redirect_to payments_path
-    # else
-    #   render :new
-    # end
     @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new(payment_collection_params)
     if @form.save

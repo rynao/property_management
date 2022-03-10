@@ -7,7 +7,11 @@
   </div>
   <div class='row g-3 my-3'>
     <div>
-      <h5>今月</h5>
+      <div class='d-flex justify-content-center'>
+        <h4 class='px-5'><%= link_to '＜', payments_path(month:@month.prev_month)%></h4>
+        <h3><%= @month.strftime("%Y年%m月") %></h3>
+        <h4 class='px-5'><%= link_to '＞', payments_path(month:@month.next_month)%></h4>
+      </div>
       <table class='table'>
         <thead>
           <tr>
@@ -16,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @month_payments.each do |payment| %>
+          <% @building_payments.each do |payment| %>
             <tr>
               <td><%= payment[0] %></td>
               <td><%= payment[1].to_s(:currency, locale: 'jp') %></td>
@@ -26,7 +30,6 @@
       </table>
     </div>
     <div style="margin-top:100px;">
-      <h5>累計</h5>
       <table class='table'>
         <thead>
           <tr>
@@ -38,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @index.each do |payment| %>
+          <% @all_payments.each do |payment| %>
             <tr>
               <td><%= payment.paid_date.strftime("%Y年%m月") %></td>
               <td><%= payment.property.building %></td>

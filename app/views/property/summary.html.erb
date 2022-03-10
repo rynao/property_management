@@ -48,11 +48,15 @@
     <h4 class='text-center bg-light py-2'>家賃</h4>
     <div class='d-flex my-3'>
       <div class='col-md-6 px-4 mt-3 mx-2 text-center'>
-        <h5>今月</h5>
+        <div class='d-flex justify-content-center'>
+          <h5 class='px-5'><%= link_to '＜', summary_property_index_path(month:@month.prev_month)%></h5>
+          <h5><%= @month.strftime("%Y年%m月") %></h5>
+          <h5 class='px-5'><%= link_to '＞', summary_property_index_path(month:@month.next_month)%></h5>
+        </div>
         <canvas id="monthChart"></canvas>
       </div>
       <div class='col-md-6 px-4 mt-3 mx-2 text-center'>
-        <h5>累計</h5>
+        <h5>過去1年実績</h5>
         <canvas id="allChart"></canvas>
       </div>
     </div>
