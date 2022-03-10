@@ -9,7 +9,7 @@ const copyPaidDate = () => {
   dateForm[1].addEventListener('change', function() {
     const targetForms = document.getElementsByClassName('paid_dates')
     for(let i = 0; i < targetForms.length; i++){
-      targetForms[i].value = `${dateForm[0].value}-${dateForm[1].value}-1`;
+      targetForms[i].value = `${dateForm[0].value}-${dateForm[1].value}-01`;
     };
   });
 };

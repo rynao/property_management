@@ -33,7 +33,7 @@
                 <td><%= p.select :room_id, { f.room.name => f.room_id },{selected: f.room_id},{ class: 'form-control', required: true, readonly: true } %></td>
                 <td><%= p.text_field :amounts, value: f.rent, class: 'form-control', required: true %></td>
                 <td><%= p.check_box :not_paid, { class: 'form-check-input'} %></td>
-                <td><%= p.text_field :paid_date, class:'paid_dates'%></td>
+                <td><%= p.text_field :paid_date, value: Date.today.beginning_of_month, class:'paid_dates'%></td>
                 <%= p.hidden_field :contract_id, value: f.id %>
                 <%= p.hidden_field :user_id, value: current_user.id %>
               </tr>
