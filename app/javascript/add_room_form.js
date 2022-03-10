@@ -29,10 +29,8 @@ const addRoomForm = () => {
     </tr>`;
     last.insertAdjacentHTML('afterend', html);
     const targetBtn = document.getElementById(`delete_btn_${indexNum}`);
-    console.log(targetBtn);
     targetBtn.addEventListener('click', function(){
       const targetElement = document.getElementById(`item_${indexNum}`);
-      console.log(targetElement);
       targetElement.remove();
     });
   });

@@ -56,7 +56,13 @@
         <canvas id="monthChart"></canvas>
       </div>
       <div class='col-md-6 px-4 mt-3 mx-2 text-center'>
-        <h5>過去1年実績</h5>
+        <h5>過去1年推移</h5>
+        <select name='property_id', id ='select_building', class=''>
+          <option value='' disabled selected>累計</option>
+          <% current_user.property.all.each do |property| %>
+            <option value=<%= property.id %>><%= property.building %></option> 
+          <% end %>
+        </select>
         <canvas id="allChart"></canvas>
       </div>
     </div>

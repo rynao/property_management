@@ -17,6 +17,7 @@ require("../amount")
 require("../add_room_form")
 require("../check_all")
 require("../copy_paid_date")
+require("../change_target_building")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

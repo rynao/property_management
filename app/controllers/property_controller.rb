@@ -3,29 +3,25 @@ class PropertyController < ApplicationController
 
   def summary
     # 今月収入
+    @monthly_income = Payment.joins(:contract, :user)
+                              .where(user_id: current_user.id, paid_date: Time.now.all_month, not_paid:'0')
+                              .sum('contracts.rent')
+
+    # 契約更新対象
     @renew_contract = Contract.joins(:user)
                               .where(user_id: current_user.id)
                               .where(Contract.arel_table[:end_date].lt(Date.today + 90))
                               .count
 
-    # 契約更新対象
+    # 今月未納
     @not_paid = Payment.joins(:user)
                         .where(not_paid:'1',user_id: current_user.id, paid_date: Time.now.all_month)
                         .count
 
-    # 今月未納
+    # 累計未納
     @not_paid_all = Payment.joins(:user)
                             .where(not_paid:'1',user_id: current_user.id)
                             .count
-
-    # 累計未納
-    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
-    @month_payments = Payment.joins(:property, :user)
-                              .where(user_id: current_user.id, paid_date: @month.all_month, not_paid:'0')
-                              .group('building').sum('amounts')
-
-      gon.month_labels = @month_payments.map{|p|p[0]}
-      gon.month_data = @month_payments.map{|p|p[1]}
 
     # 稼働状況
     @occupant_rooms = Room.joins(:contracts).where(user_id: current_user.id)
@@ -34,19 +30,24 @@ class PropertyController < ApplicationController
       gon.occupancy_rate = ((@occupant_rooms.count.to_f / Room.all.count.to_f)*100).round(2)
 
     # 月別家賃
-    @monthly_income = Payment.joins(:contract, :user)
-                              .where(user_id: current_user.id, paid_date: Time.now.all_month, not_paid:'0')
-                              .sum('contracts.rent')
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
+    @month_payments = Payment.joins(:property, :user)
+                              .where(user_id: current_user.id, paid_date: @month.all_month, not_paid:'0')
+                              .group('building').sum('amounts')
 
-    # 過去1年累計家賃実績
+      gon.month_labels = @month_payments.map{|p|p[0]}
+      gon.month_data = @month_payments.map{|p|p[1]}
+
+    # 過去1年家賃実績
     target_month = Date.today.beginning_of_month
     last_year = target_month - 1.year
+
     @payments = Payment.joins(:property, :user)
-                        .where(user_id: current_user.id, not_paid:'0')
-                        .where(Payment.arel_table[:paid_date].gteq last_year)
-                        .order(:paid_date)
-                        .group('paid_date')
-                        .sum('amounts')
+                      .where(user_id: current_user.id, not_paid:'0')
+                      .where(Payment.arel_table[:paid_date].gteq last_year)
+                      .order(:paid_date)
+                      .group('paid_date')
+                      .sum('amounts')
                 
       gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
       gon.all_data = @payments.map{|p|p[1]}
@@ -93,6 +94,22 @@ class PropertyController < ApplicationController
     else
       render :show
     end
+  end
+
+  def get_building_rents
+    target_building = params[:property_id]
+    target_month = Date.today.beginning_of_month
+    last_year = target_month - 1.year
+
+    @payments = Payment.joins(:property, :user)
+                        .where(user_id: current_user.id, not_paid:'0', property_id: target_building)
+                        .where(Payment.arel_table[:paid_date].gteq last_year)
+                        .order(:paid_date)
+                        .group('paid_date')
+                        .sum('amounts')
+      gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
+      gon.all_data = @payments.map{|p|p[1]}
+      render json: { labels: gon.all_labels, data: gon.all_data}
   end
 
   private

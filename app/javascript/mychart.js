@@ -22,7 +22,7 @@ window.addEventListener('load', function(){
     });
 
     const ctx2 = document.getElementById('allChart');
-    const allChart = new Chart(ctx2, {
+    window.allChart = new Chart(ctx2, {
         type: 'bar',
         data: {
             labels: gon.all_labels,
