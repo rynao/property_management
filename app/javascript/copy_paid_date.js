@@ -14,6 +14,4 @@ const copyPaidDate = () => {
   });
 };
 
-
-
 window.addEventListener('load',copyPaidDate);
