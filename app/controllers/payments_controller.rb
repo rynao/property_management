@@ -37,6 +37,7 @@ class PaymentsController < ApplicationController
     # end
     @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new(payment_collection_params)
+    binding.pry
     if @form.save
       redirect_to payments_path
     else
