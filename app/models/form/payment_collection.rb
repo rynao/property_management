@@ -13,10 +13,14 @@ class Form::PaymentCollection < Form::Base
 
   def save
     Payment.transaction do
-      self.payments.map(&:save!)
+      self.payments.map do |payment|
+        if payment.checked
+          payment.save
+        end
+      end
     end
       return true
     rescue => e
       return false
-  end
+    end
 end

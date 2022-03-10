@@ -24,7 +24,7 @@ class PaymentsController < ApplicationController
 
   def new
     # @payment = Payment.new
-    @contracts = current_user.contracts.all
+    @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new
   end
 
@@ -35,6 +35,7 @@ class PaymentsController < ApplicationController
     # else
     #   render :new
     # end
+    @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new(payment_collection_params)
     if @form.save
       redirect_to payments_path
@@ -76,6 +77,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_collection_params
-    params.permit(payments: [:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id, :user_id])
+    params.require(:form_payment_collection)
+    .permit(payments_attributes: [:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id, :user_id, :checked])
   end
 end
