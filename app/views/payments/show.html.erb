@@ -18,8 +18,12 @@
     未納：<%= @payment.not_paid %>
   </div>
   <div>
-    <%=link_to '編集', edit_payment_path, class:'btn btn-primary' %>
-    <%=link_to '削除', payment_path, method: :delete, data: {confirm: "削除しますか？"}, class:'btn btn-primary' %>
+    <%=link_to edit_payment_path, class:'mx-3' do %>
+      <i class="bi bi-pencil-square" style="font-size: 22px; color: #666;"></i>
+    <% end %>
+    <%=link_to payment_path, method: :delete, data: {confirm: "削除しますか？"}, class:'' do %>
+      <i class="bi bi-trash3" style="font-size: 22px; color: #666;"></i>
+    <% end %>
     <%=link_to '戻る', payments_path %>
   </div>
 </div>
