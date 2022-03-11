@@ -22,7 +22,7 @@ const addRoomForm = () => {
         <input class="form-control" placeholder="例：南東" type="text" name="form_room_collection[rooms_attributes][${indexNum}][direction]" id="form_room_collection_rooms_attributes_${indexNum}_direction">
       </td>
       <td>
-        <span class="delete-form-btn btn btn-outline-secondary", id="delete_btn_${indexNum}">削除</span>
+        <span class="delete-form-btn", id="delete_btn_${indexNum}"><i class="bi bi-x-circle" style="font-size: 22px; color: #666;"></i></span>
       </td>
       <input value=${propertyId.value} type="hidden" name="form_room_collection[rooms_attributes][${indexNum}][property_id]" id="form_room_collection_rooms_attributes_${indexNum}_property_id">
       <input value=${userId.value} type="hidden" name="form_room_collection[rooms_attributes][${indexNum}][user_id]" id="form_room_collection_rooms_attributes_${indexNum}_user_id">

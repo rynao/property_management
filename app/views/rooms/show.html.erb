@@ -8,8 +8,12 @@
   <div class='d-flex justify-content-between align-items-center'>
     <h5 class=''><%= @room.name %></h5>
     <div class='mx-2 px-2'>
-      <%=link_to '編集', edit_property_room_path, class:'btn btn-outline-secondary' %>
-      <%=link_to '削除', property_room_path, method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"}, class:'btn btn-outline-secondary' %>
+      <%=link_to edit_property_room_path, class:'mx-3' do %>
+        <i class="bi bi-pencil-square" style="font-size: 22px; color: #666;"></i>
+      <% end %>
+      <%=link_to property_room_path, method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"}, class:'mx-3' do %>
+        <i class="bi bi-trash3" style="font-size: 22px; color: #666;"></i>
+      <% end %>
       <%=link_to '戻る', property_path(@room.property.id) %>
     </div>
   </div>
