@@ -100,16 +100,24 @@ class PropertyController < ApplicationController
     target_building = params[:property_id]
     target_month = Date.today.beginning_of_month
     last_year = target_month - 1.year
-
-    @payments = Payment.joins(:property, :user)
-                        .where(user_id: current_user.id, not_paid:'0', property_id: target_building)
-                        .where(Payment.arel_table[:paid_date].gteq last_year)
-                        .order(:paid_date)
-                        .group('paid_date')
-                        .sum('amounts')
-      gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
-      gon.all_data = @payments.map{|p|p[1]}
-      render json: { labels: gon.all_labels, data: gon.all_data}
+    if target_building == '0'
+      @payments = Payment.joins(:property, :user)
+                          .where(user_id: current_user.id, not_paid:'0')
+                          .where(Payment.arel_table[:paid_date].gteq last_year)
+                          .order(:paid_date)
+                          .group('paid_date')
+                          .sum('amounts')
+    else
+      @payments = Payment.joins(:property, :user)
+                          .where(user_id: current_user.id, not_paid:'0', property_id: target_building)
+                          .where(Payment.arel_table[:paid_date].gteq last_year)
+                          .order(:paid_date)
+                          .group('paid_date')
+                          .sum('amounts')
+    end
+    gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
+    gon.all_data = @payments.map{|p|p[1]}
+    render json: { labels: gon.all_labels, data: gon.all_data}
   end
 
   private

@@ -6,7 +6,7 @@
     <%=link_to '物件登録', new_property_path, class:'btn btn-primary' %>
   </div>
 
-<table class='table mt-3'>
+<table class='table table-hover mt-3'>
     <thead>
       <tr>
         <th>物件名称</th>
@@ -18,13 +18,12 @@
     </thead>
     <tbody>
       <% @property.each do |property| %>
-        <tr>
+        <tr onclick='window.location="/property/<%= property.id %>"' role="link" style="cursor: pointer;">
           <td><%= property.building %></td>
           <td><%= property.prefecture %></td>
           <td><%= property.city %></td>
           <td><%= property.property_type %></td>
           <td><%= property.total_units %></td>
-          <td><%= link_to '詳細', property_path(property.id), class:'btn btn-outline-secondary' %></td>
         </tr>
       <% end %>
     </tbody>
