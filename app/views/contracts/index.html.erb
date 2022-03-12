@@ -5,6 +5,31 @@
     <h4 style="margin-right: 40px;">契約一覧</h4>
     <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
   </div>
+  <div class='card shadow my-5 py-3 px-5 text-center col-md-6'>
+    <h5 class='' style="color:red;">更新対象契約</h5>
+    <div>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>物件名称</th>
+            <th>部屋</th>
+            <th>契約終了日</th>
+            <th>契約者</th>
+          </tr>
+        </thead>
+        <body>
+          <% @renew_contracts.each do |c| %>
+            <tr onclick='window.location="/contracts/<%= c.id %>/edit"' role="link" style="cursor: pointer;">
+              <td><%= c.property.building %></td>
+              <td><%= c.room.name %></td>
+              <td><%= c.end_date.strftime("%Y年%-m月%-d日") %></td>
+              <td><%= c.contractor %></td>
+            </tr>
+          <% end %>
+        </body>
+      </table>
+    </div>
+  </div>
   <div class='row g-3 my-3'>
     <table class='table mt-3'>
       <thead>
@@ -49,8 +74,8 @@
         <tr>
           <th>物件名称</th>
           <th>部屋</th>
-          <th>契約開始月</th>
-          <th>契約終了月</th>
+          <th>契約開始日</th>
+          <th>契約終了日</th>
           <th>家賃</th>
           <th>管理費</th>
           <th>契約者</th>
