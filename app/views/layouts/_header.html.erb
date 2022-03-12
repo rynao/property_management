@@ -21,8 +21,13 @@
           <%= link_to '契約管理', contracts_path, class: 'nav-link' %>
         </li>
       </ul>
-      <div class='nav-item ms-auto logout-block'>
+      <div class='nav-item ms-auto logout-block d-flex'>
+        <div class='mx-3'>
+          <%= link_to current_user.nickname, edit_user_registration_path, class:'nav-link' %>
+        </div>
+        <div>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'nav-link' %>
+        </div>
       </div>
     </div>
   </div>
