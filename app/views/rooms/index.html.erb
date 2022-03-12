@@ -1,53 +1,55 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-  <div class='mt-5'>
-    <h4>部屋一覧</h4>
-  </div>
-  <table class='table table-hover mt-3'>
-    <thead>
-      <tr>
-        <th>物件名称</th>
-        <th>部屋</th>
-        <th>間取り</th>
-        <th>広さ</th>
-        <th>方角</th>
-        <th>契約状況</th>
-        <th>入居者</th>
-        <th>家賃</th>
-        <th>管理費</th>
-        <th>契約開始日</th>
-        <th>契約終了日</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @rooms.each do |room| %>
-        <tr onclick='window.location="/property/<%= room.property.id %>/rooms/<%= room.id %>"' role="link" style="cursor: pointer;">
-          <td><%= room.property.building %></td>
-          <td><%= room.name %></td>
-          <td><%= room.layout %></td>
-          <td><%= room.room_size %></td>
-          <td><%= room.direction %></td>
-          <% if room.contracts.exists? && room.contracts.order(start_date: :desc).first.end_date >= Date.today %>
-            <td>契約中</td>
-            <td><%= room.contracts.order(start_date: :desc).first.contractor %></td>
-          <% else %>
-            <td style="color:red;">空室</td>
-            <td>-</td>
-          <% end %>
-          <% if room.contracts.exists? %>
-            <td><%= room.contracts.order(start_date: :desc).first.rent.to_s(:currency, locale: 'jp') %>
-            <td><%= room.contracts.order(start_date: :desc).first.management_cost.to_s(:currency, locale: 'jp') %>
-            <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%-m月%-d日") %></td>
-            <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%-m月%-d日") %></td>
-          <% else %>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          <% end %>
+  <div class='card shadow row g-3 my-5 p-5'>
+    <div class='text-center'>
+      <h4>部屋一覧</h4>
+    </div>
+    <table class='table table-hover mt-3'>
+      <thead>
+        <tr>
+          <th>物件名称</th>
+          <th>部屋</th>
+          <th>間取り</th>
+          <th>広さ</th>
+          <th>方角</th>
+          <th>契約状況</th>
+          <th>入居者</th>
+          <th>家賃</th>
+          <th>管理費</th>
+          <th>契約開始日</th>
+          <th>契約終了日</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @rooms.each do |room| %>
+          <tr onclick='window.location="/property/<%= room.property.id %>/rooms/<%= room.id %>"' role="link" style="cursor: pointer;">
+            <td><%= room.property.building %></td>
+            <td><%= room.name %></td>
+            <td><%= room.layout %></td>
+            <td><%= room.room_size %></td>
+            <td><%= room.direction %></td>
+            <% if room.contracts.exists? && room.contracts.order(start_date: :desc).first.end_date >= Date.today %>
+              <td>契約中</td>
+              <td><%= room.contracts.order(start_date: :desc).first.contractor %></td>
+            <% else %>
+              <td style="color:red;">空室</td>
+              <td>-</td>
+            <% end %>
+            <% if room.contracts.exists? %>
+              <td><%= room.contracts.order(start_date: :desc).first.rent.to_s(:currency, locale: 'jp') %>
+              <td><%= room.contracts.order(start_date: :desc).first.management_cost.to_s(:currency, locale: 'jp') %>
+              <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%-m月%-d日") %></td>
+              <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%-m月%-d日") %></td>
+            <% else %>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

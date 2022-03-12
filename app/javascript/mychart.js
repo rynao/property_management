@@ -61,7 +61,8 @@ window.addEventListener('load', function(){
             datasets: [{
                 label: '稼働状況',
                 data: [percentage, 100 - percentage],
-                backgroundColor: ['#365596','rgba(0, 0, 0, 0)'],
+                backgroundColor: ['#365596','#f7f6f5'],
+                borderWidth: 0,
                 cutout:'70%',
             }]
         },

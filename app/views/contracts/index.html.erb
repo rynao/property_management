@@ -1,10 +1,6 @@
 <%= render 'layouts/header' %>
 
 <div class='container'>
-  <div class='d-flex mt-5'>
-    <h4 style="margin-right: 40px;">契約一覧</h4>
-    <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
-  </div>
   <div class='card shadow my-5 py-3 px-5 text-center col-md-6'>
     <h5 class='' style="color:red;">更新対象契約</h5>
     <div>
@@ -30,7 +26,11 @@
       </table>
     </div>
   </div>
-  <div class='row g-3 my-3'>
+  <div class='card shadow row g-3 my-3 p-5'>
+    <div class='d-flex'>
+      <h4 style="margin-right: 40px;">契約一覧</h4>
+      <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
+    </div>
     <table class='table mt-3'>
       <thead>
         <tr>
@@ -67,8 +67,8 @@
       </tbody>
     </table>
   </div>
-  <div class='mt-4'>
-    <h5 class='py-3'>過去の契約一覧</h5>
+  <div class='card shadow row g-3 my-3 px-5 py-3'>
+    <h5 class='py-2'>過去の契約一覧</h5>
     <table class='table'>
       <thead>
         <tr>
