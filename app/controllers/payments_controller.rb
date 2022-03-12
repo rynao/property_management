@@ -10,6 +10,7 @@ class PaymentsController < ApplicationController
     @all_payments = Payment.joins(:property, :room, :contract, :user)
               .where(user_id: current_user.id, paid_date: @month.all_month).order(:building).order(:name)
 
+    @not_paid = Payment.where(not_paid: true)
   end
 
   def new
@@ -56,7 +57,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:paid_date, :not_paid, :amounts).merge(property_id: params[:property_id], room_id: params[:room_id], contract_id: params[:contract_id], user_id: current_user.id)
+    params.require(:payment).permit(:paid_date, :not_paid, :amounts, :property_id, :room_id, :contract_id).merge(user_id: current_user.id)
   end
 
   def payment_collection_params

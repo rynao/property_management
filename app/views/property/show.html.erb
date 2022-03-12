@@ -120,6 +120,8 @@
         <th>方角</th>
         <th>契約状況</th>
         <th>入居者</th>
+        <th>家賃</th>
+        <th>管理費</th>
         <th>契約開始日</th>
         <th>契約終了日</th>
       </tr>
@@ -143,9 +145,13 @@
             <td>-</td>
           <% end %>
           <% if room.contracts.exists? %>
+            <td><%= room.contracts.order(start_date: :desc).first.rent.to_s(:currency, locale: 'jp') %>
+            <td><%= room.contracts.order(start_date: :desc).first.management_cost.to_s(:currency, locale: 'jp') %>
             <td><%= room.contracts.order(start_date: :desc).first.start_date.strftime("%Y年%-m月%-d日") %></td>
             <td><%= room.contracts.order(start_date: :desc).first.end_date.strftime("%Y年%-m月%-d日") %></td>
           <% else %>
+            <td>-</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
           <% end %>
