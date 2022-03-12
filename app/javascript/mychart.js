@@ -12,7 +12,12 @@ window.addEventListener('load', function(){
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks : {
+                        callback: function(tick) {
+                          return '¥' + tick.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        }
+                      }
                 }
             },
             plugins: {
@@ -34,7 +39,12 @@ window.addEventListener('load', function(){
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks : {
+                        callback: function(tick) {
+                          return '¥' + tick.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        }
+                      }
                 }
             },
             plugins: {

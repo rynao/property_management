@@ -10,7 +10,8 @@ class PropertyController < ApplicationController
     # 契約更新対象
     @renew_contract = Contract.joins(:user)
                               .where(user_id: current_user.id)
-                              .where(Contract.arel_table[:end_date].lt(Date.today + 90))
+                              .where("end_date <= ?",Date.today + 90)
+                              .where("end_date >= ?",Date.today)
                               .count
 
     # 今月未納
