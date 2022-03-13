@@ -1,10 +1,32 @@
-.logout-block a {
-  color: #fff;
+html {
+  color: #333333;
+  font-family: "Unica One", "Avenir", "游ゴシック", "YuGothic",
+    "ヒラギノ角ゴ Pro W6", "HIragino Kaku Gothic Pro W6",
+    "HIragino Kaku Gothic Pro", Osaka, Meiryo, "メイリオ", "ＭＳ Ｐゴシック",
+    "MS P Gothic", sans-serif;
+  margin: 0;
+  letter-spacing: 0.05em;
 }
 
-.logout-block a:hover {
-  color: #dc3545;
-}
 body {
 	background-color:#f7f6f5;
+}
+
+.navbar-add {
+  background-color: #A7D9D5;
+  height: 3px;
+}
+
+.logout-link a:hover {
+  color: #dc3545;
+}
+
+.nav-add {
+  color:#A7D9D5;
+  text-decoration: none;
+}
+
+.nav-add a:hover {
+  color:#365596;
+  font-weight: bold;
 }
