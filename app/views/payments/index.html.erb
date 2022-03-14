@@ -29,7 +29,7 @@
   <div class='row card shadow row g-3 my-2 p-5'>
     <div class='d-flex'>
       <h4 style="margin-right: 40px;">支払い状況</h4>
-      <%=link_to '支払い登録', new_payment_path, class:'btn btn-primary' %>
+      <%=link_to '支払い登録', new_payment_path(paid_date: @month), class:'btn btn-primary' %>
     </div>
     <div>
       <div class='d-flex justify-content-center'>
@@ -75,7 +75,7 @@
         </thead>
         <tbody>
           <% @all_payments.each do |payment| %>
-            <tr onclick='window.location="/payments/<%= payment.id %>/edit"' role="link" style="cursor: pointer;">
+            <tr>
               <td><%= payment.paid_date.strftime("%Y年%m月") %></td>
               <td><%= payment.property.building %></td>
               <td><%= payment.room.name %></td>

@@ -9,7 +9,7 @@
           <%= payments.label :paid_date, '対象月：' %>
         </div>
         <div class='col-2'>
-          <%= payments.date_select :paid_date, {:discard_day => true}, {class: "form-control select_paid_date", style:"display: inline-block; width: auto;"}%>
+          <%= payments.date_select :paid_date, {discard_day: true, default: @month}, {class: "form-control select_paid_date", style:"display: inline-block; width: auto;"}%>
         </div>
       </div>
       <table class="table mt-3">
@@ -33,7 +33,7 @@
                 <td><%= p.select :room_id, { f.room.name => f.room_id },{selected: f.room_id},{ class: 'form-control', required: true, readonly: true } %></td>
                 <td><%= p.text_field :amounts, value: f.rent, class: 'form-control', required: true %></td>
                 <td><%= p.check_box :not_paid, { class: 'form-check-input'} %></td>
-                <td><%= p.hidden_field :paid_date, value: Date.today.beginning_of_month, class:'paid_dates'%></td>
+                <td><%= p.hidden_field :paid_date, value: @month, class:'paid_dates'%></td>
                 <%= p.hidden_field :contract_id, value: f.id %>
                 <%= p.hidden_field :user_id, value: current_user.id %>
               </tr>
