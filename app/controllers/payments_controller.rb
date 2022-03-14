@@ -16,13 +16,15 @@ class PaymentsController < ApplicationController
   def new
     @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new
+    @month = params[:paid_date] ? Date.parse(params[:paid_date]) : Time.zone.today
   end
 
   def create
     @contracts = current_user.contracts.where("end_date >= ?",Date.today)
     @form = Form::PaymentCollection.new(payment_collection_params)
     if @form.save
-      redirect_to payments_path
+      @month = Payment.last.paid_date
+      redirect_to payments_path(month:@month)
     else
       render :new
     end
@@ -36,7 +38,7 @@ class PaymentsController < ApplicationController
 
   def update
     if @payment.update(payment_params)
-      redirect_to payments_path
+      redirect_to payments_path(month:@payment.paid_date)
     else
       render :edit
     end
@@ -44,9 +46,9 @@ class PaymentsController < ApplicationController
 
   def destroy
     if @payment.destroy
-      redirect_to payments_path
+      redirect_to payments_path(month:@payment.paid_date)
     else
-      render :show
+      render payments_path(month:@payment.paid_date)
     end
   end
 
