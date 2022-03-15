@@ -27,6 +27,7 @@ class PropertyCompany
     validates :prefecture
     validates :city
     validates :building
+    validates :property_type
     validates :business_entity
     validates :user_id
   end
@@ -35,8 +36,9 @@ class PropertyCompany
   validates :telephone, format: {with: /\A\d{10,11}\z/, message: 'は10~11桁の半角数字で入力してください'}, allow_blank: true
   validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: 'は有効なメールアドレス形式で入力してください'}, allow_blank: true
 
-  # delegate :persisted?, to: :property
+  validates :name, presence: true, if: :present_columns?
 
+  # formオブジェクトで編集可能にするために必要
   def initialize(attributes = nil, property: Property.new)
     @property = property
     if @property.management_company.nil?
@@ -70,6 +72,10 @@ class PropertyCompany
   end
 
   private
+
+  def present_columns?
+    department.present? || sales_person.present? ||telephone.present? || email.present?
+  end
 
   def default_attributes_1
     {

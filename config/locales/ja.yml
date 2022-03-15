@@ -6,3 +6,23 @@ jp:
         format: "%n%u"
         negative_format: "-%n%u"
         precision: 0
+
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+      property:
+        postal_code: 郵便番号
+        prefecture: 都道府県
+        city: 市・区
+        building: 物件名称
+        total_units: 総戸数
+        property_type: 物件種別
+        business_entity: 所有者
+        land_area: 土地面積
+        building_area: 建物面積
+      management_company:
+        name: 管理会社
+        telephone: 電話番号
+        email: メールアドレス
