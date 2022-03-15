@@ -57,7 +57,7 @@
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>物件種別</label>
           <div class='col-md-3'>
-            <%= f.select :property_type, ["1棟マンション","1棟アパート","1棟商業ビル","戸建賃貸","区分マンション","賃貸併用住宅"], {include_blank: '選択してください'}, {class: 'form-control'} %>
+            <%= f.select :property_type, ["1棟マンション","1棟アパート","1棟商業ビル","戸建賃貸","区分マンション","賃貸併用住宅"], {required: true, include_blank: '選択してください'}, {class: 'form-control'} %>
           </div>
           <label class='col-md-2 form-label'>所有者</label>
           <div class='col-md-3'>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class='row mb-4'>
-          <label class='col-md-2 form-label'>連絡先</label>
+          <label class='col-md-2 form-label'>電話番号</label>
           <div class='col-md-8'>
             <%= f.text_field :telephone, class:'form-control', placeholder:'例：09012345678' %>
           </div>
