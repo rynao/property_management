@@ -35,7 +35,8 @@ class PropertyCompany
   validates :total_units, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: 'は1以上の半角整数で入力してください'}, allow_blank: true
   validates :telephone, format: {with: /\A\d{10,11}\z/, message: 'は10~11桁の半角数字で入力してください'}, allow_blank: true
   validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: 'は有効なメールアドレス形式で入力してください'}, allow_blank: true
-
+  validates :land_area, numericality: {greater_than_or_equal_to: 1.00, message: 'は1.00以上の半角数値で入力してください'}, allow_blank: true
+  validates :building_area, numericality: {greater_than_or_equal_to: 1.00, message: 'は1.00以上の半角数値で入力してください'}, allow_blank: true
   validates :name, presence: true, if: :present_columns?
 
   # formオブジェクトで編集可能にするために必要
@@ -50,22 +51,27 @@ class PropertyCompany
   end
 
   def save
-    if :name.present?
+    if name.blank?
+      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id)
+    else
       management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
       Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id, management_company_id: management.id)
-    else
-      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id)
     end
   end
 
   def update
-    if :management_company_id.present?
-      management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
-      property = Property.find(property_id)
-      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
-    else
+    if management_company_id.present? && name.present?
       management = ManagementCompany.find(management_company_id)
       management.update(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
+      property = Property.find(property_id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
+    elsif management_company_id.present?
+      management = ManagementCompany.find(management_company_id)
+      management.destroy
+      property = Property.find(property_id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: nil)
+    else
+      management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
       property = Property.find(property_id)
       property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
     end
