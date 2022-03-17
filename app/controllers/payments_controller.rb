@@ -26,6 +26,8 @@ class PaymentsController < ApplicationController
       @month = Payment.last.paid_date
       redirect_to payments_path(month:@month)
     else
+      binding.pry
+      flash.now[:errors] = @form.errors.gsub(",","<br>")
       @form = Form::PaymentCollection.new
       @month = params[:paid_date] ? Date.parse(params[:paid_date]) : Time.zone.today
       render :new

@@ -15,16 +15,23 @@ class Form::PaymentCollection < Form::Base
   end
 
   def save
+    success = true
+    @errors =[]
     Payment.transaction do
-      return false unless valid?
-      self.payments.map do |payment|
+      # return false unless valid?
+      @payments.each do |payment|
         if payment.checked
-          payment.save
+          unless payment.save
+            success = false
+          @errors << payment.errors.full_messages
+          end
         end
       end
+      unless success
+        @errors = @errors.join(',')
+        raise ActiveRecord::Rollback
+      end
     end
-      return true
-    rescue => e
-      return false
-    end
+    return success
+  end
 end
