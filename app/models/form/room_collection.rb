@@ -12,11 +12,19 @@ class Form::RoomCollection < Form::Base
   end
 
   def save
+    success = true
+    @errors =[]
     Room.transaction do
-      self.rooms.map(&:save!)
+      @rooms.each do |room|
+        unless room.save
+          success = false
+          @errors << room.errors.full_messages
+        end
+      end
+      unless success
+        raise ActiveRecord::Rollback
+      end
     end
-      return true
-    rescue => e
-      return false
+    return success
   end
 end
