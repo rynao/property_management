@@ -22,6 +22,7 @@ class Form::RoomCollection < Form::Base
         end
       end
       unless success
+        @errors = @errors.join(',')
         raise ActiveRecord::Rollback
       end
     end

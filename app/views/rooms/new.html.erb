@@ -4,18 +4,10 @@
   <div class='card shadow px-5 py-3' style='max-width: 900px'>
     <h3 class='mx-auto mt-3'>部屋情報登録</h3>
       <h5 class='mt-3 mx-auto'><%= @property.building %></h5>
+      <% unless @form.errors.blank? || @form.errors.nil? %>
+        <div class='alert alert-danger'><%= flash[:errors].html_safe %></div>
+      <% end %>      
       <%= form_with(model:@form, url: property_rooms_path, method: :post, local: true) do |f| %>
-        <% unless @form.errors.blank? || @form.errors.nil? %>
-          <div class="error-alert" style='color:red;'>
-            <ul>
-              <% @form.errors.each do |error| %>
-                <li class="error-message">
-                  <%= error %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
         <table class="table">
           <thead>
             <tr>

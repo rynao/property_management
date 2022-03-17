@@ -19,6 +19,7 @@ class RoomsController < ApplicationController
     if @form.save
       redirect_to property_path(@property.id)
     else
+      flash.now[:errors] = @form.errors.gsub(",","<br>")
       render :new
     end
   end
