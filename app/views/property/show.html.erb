@@ -155,14 +155,6 @@
             <td>-</td>
             <td>-</td>
           <% end %>
-          <td>
-            <%= link_to edit_property_room_path(room.property.id, room.id), class:'mx-3' do %>
-              <i class="bi bi-pencil-square" style="font-size: 22px; color: #666;"></i>
-            <% end %>
-            <%= link_to property_room_path(room.property.id, room.id), method: :delete, data: {confirm: "部屋に紐付く契約も全て削除されます。削除しますか？"}, class:'mx-3' do %>
-              <i class="bi bi-trash3" style="font-size: 22px; color: #666;"></i>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>

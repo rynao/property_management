@@ -25,6 +25,7 @@ class ContractsController < ApplicationController
     if @contract.save
       redirect_to contracts_path
     else
+      flash.now[:errors] = @contract.errors.full_messages.join(',').gsub(",","<br>")
       render :new
     end
   end
@@ -39,6 +40,7 @@ class ContractsController < ApplicationController
     if @contract.update(contract_params)
       redirect_to contracts_path
     else
+      flash.now[:errors] = @contract.errors.full_messages.join(',').gsub(",","<br>")
       render :edit
     end
   end

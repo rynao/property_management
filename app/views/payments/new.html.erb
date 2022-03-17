@@ -3,6 +3,9 @@
 <div class='container mt-5'>
   <div class='card shadow px-5 py-3'>
     <h3 class='mx-auto mt-3'>支払い情報登録</h3>
+    <% unless flash[:errors].nil? %>
+      <div class='alert alert-danger'><%= flash[:errors].html_safe %></div>
+    <% end %>
     <%= form_with(model:@form, url: payments_path, method: :post, local: true) do |payments| %>
       <div class='row mt-5'>
         <div class='col-2', style="display: inline-block; width: auto;">
