@@ -14,24 +14,30 @@
       <div class='col-md-6'>
         <div class='card shadow text-center mx-4 my-5'>
           <div class='card-body'>
-            <h5 class='card-title'>契約更新対象</h5>
-            <div class='card-text fw-bold fs-3' style='color:#365596'><%= @renew_contract %>件</div>
+            <%= link_to contracts_path, style:"text-decoration:none;" do%>
+              <h5 class='card-title' style='color:#333333'>契約更新対象</h5>
+              <div class='card-text fw-bold fs-3' style='color:#365596'><%= @renew_contract %>件</div>
+            <% end %>
           </div>
         </div>
       </div>
       <div class='col-md-6'>
         <div class='card shadow text-center mx-4 my-5'>
           <div class='card-body'>
-            <h5 class='card-title'>今月未納</h5>
-            <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid %>件</div>
+            <%= link_to payments_path, style:"text-decoration:none;" do%>
+              <h5 class='card-title' style='color:#333333'>今月未納</h5>
+              <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid %>件</div>
+            <% end %>
           </div>
         </div>
       </div>
       <div class='col-md-6'>
         <div class='card shadow text-center mx-4 my-5'>
           <div class='card-body'>
-            <h5 class='card-title'>累計未納</h5>
-            <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid_all %>件</div>
+            <%= link_to payments_path, style:"text-decoration:none;" do%>
+              <h5 class='card-title' style='color:#333333'>累計未納</h5>
+              <div class='card-text fw-bold fs-3' style='color:#BD1A04;'><%= @not_paid_all %>件</div>
+            <% end %>
           </div>
         </div>
       </div>
