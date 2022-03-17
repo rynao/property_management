@@ -71,6 +71,7 @@ class PropertyController < ApplicationController
       @property_company.save
       redirect_to property_index_path
     else
+      flash.now[:errors] = @property_company.errors.full_messages.join(',').gsub(",","<br>")
       render :new
     end
   end
@@ -85,6 +86,7 @@ class PropertyController < ApplicationController
       @property_company.update
       redirect_to @property
     else
+      flash.now[:errors] = @property_company.errors.full_messages.join(',').gsub(",","<br>")
       render :edit
     end
   end

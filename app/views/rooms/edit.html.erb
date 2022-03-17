@@ -4,6 +4,9 @@
   <div class='card shadow px-5 py-3' style='max-width: 700px'>
     <h3 class='mx-auto mt-3'>部屋情報編集</h3>
       <h5 class='mt-3 mx-auto'><%= @property.building %></h5>
+      <% unless flash[:errors].nil? %>
+        <div class='alert alert-danger'><%= flash[:errors].html_safe %></div>
+      <% end %>
       <%= form_with(model:[@property, @room], local: true) do |f| %>
         <div class='row g-3 py-5'>
           <div class='row mb-3'>

@@ -35,6 +35,8 @@ class RoomsController < ApplicationController
     if @room.update(room_params)
       redirect_to property_path(@room.property.id)
     else
+      flash.now[:errors] = @room.errors.full_messages.join(',').gsub(",","<br>")
+      @property = Property.find(params[:property_id])
       render :edit
     end
   end
