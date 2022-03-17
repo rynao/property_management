@@ -47,10 +47,10 @@ class PropertyController < ApplicationController
                       .where(user_id: current_user.id, not_paid:'0')
                       .where(Payment.arel_table[:paid_date].gteq last_year)
                       .order(:paid_date)
-                      .group('paid_date')
+                      .group('YEAR(paid_date)').group('MONTH(paid_date)')
                       .sum('amounts')
-                
-      gon.all_labels = @payments.map{|p|p[0].strftime("%Y年%m月")}
+      gon.all_labels = @payments.map{|p|p[0][0].to_s + "年" + p[0][1].to_s + "月"}
+      binding.pry
       gon.all_data = @payments.map{|p|p[1]}
   end
 
