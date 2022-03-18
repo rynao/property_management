@@ -50,7 +50,6 @@ class PropertyController < ApplicationController
                       .group('YEAR(paid_date)').group('MONTH(paid_date)')
                       .sum('amounts')
       gon.all_labels = @payments.map{|p|p[0][0].to_s + "年" + p[0][1].to_s + "月"}
-      binding.pry
       gon.all_data = @payments.map{|p|p[1]}
   end
 
