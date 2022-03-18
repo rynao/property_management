@@ -17,7 +17,7 @@ class ContractsController < ApplicationController
   end
 
   def new
-    @contract = Contract.new
+    @contract = Contract.new(property_id: params[:property_id], room_id: params[:room_id])
   end
 
   def create

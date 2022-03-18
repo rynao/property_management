@@ -57,7 +57,10 @@
     </tbody>
   </table>
   <div class='mt-5'>
-    <h5>契約一覧</h5>
+    <div class='d-flex'>
+      <h5 style="margin-right: 40px;">契約一覧</h5>
+      <%=link_to '契約登録', new_contract_path(property_id: @room.property.id, room_id: @room.id), class:'btn btn-primary' %>
+    </div>
     <table class='table mt-3'>
       <thead>
         <tr>
