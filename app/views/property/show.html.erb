@@ -22,89 +22,53 @@
     </div>
   </div>
   <table class='table mt-3'>
-    <thead>
-      <tr>
-        <th>総戸数</th>
-        <th>築年月</th>
-        <th>土地面積</th>
-        <th>建物面積</th>
-        <th>物件種別</th>
-        <th>所有者</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @property.total_units %></td>
-        <% unless @property.building_year.nil? %>
-          <td><%= @property.building_year.strftime("%Y年%-m月") %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% unless @property.land_area.nil? %>
-          <td><%= @property.land_area %>㎡</td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% unless @property.building_area.nil? %>
-          <td><%= @property.building_area %>㎡</td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <td><%= @property.property_type %></td>
-        <td><%= @property.business_entity %></td>
-      </tr>
-    </tbody>
+    <tr>
+      <th>総戸数</th>
+      <td><%= @property.total_units %></td>
+    </tr>
+    <tr>
+      <th>築年月</th>
+      <td><%= @property.building_year.strftime("%Y年%-m月") if @property.building_year.present? %></td>
+    </tr>
+    <tr>
+      <th>土地面積</th>
+      <td><%= @property.land_area %>㎡</td>
+    </tr>
+    <tr>
+      <th>建物面積</th>
+      <td><%= @property.building_area %>㎡</td>
+    </tr>
+    <tr>
+      <th>物件種別</th>
+      <td><%= @property.property_type %></td>
+    </tr>
+    <tr>
+      <th>所有者</th>
+      <td><%= @property.business_entity %></td>
+    </tr>
   </table>
   <h5 class='mt-5'>管理会社情報</h5>
   <table class='table mt-2'>
-    <thead>
-      <tr>
-        <th>会社名</th>
-        <th>部署</th>
-        <th>担当者</th>
-        <th>電話番号</th>
-        <th>メールアドレス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% unless @property.management_company.nil? %>
-        <tr>
-          <% unless @property.management_company.name.nil? %>
-            <td><%= @property.management_company.name %></td>
-          <% else %>
-            <td></td>
-          <% end %>
-          <% unless @property.management_company.department.nil? %>
-            <td><%= @property.management_company.department %></td>
-          <% else %>
-            <td></td>
-          <% end %>
-          <% unless @property.management_company.sales_person.nil? %>
-            <td><%= @property.management_company.sales_person %></td>
-          <% else %>
-            <td></td>
-          <% end %>
-          <% unless @property.management_company.telephone.nil? %>
-            <td><%= @property.management_company.telephone %></td>
-          <% else %>
-            <td></td>
-          <% end %>
-          <% unless @property.management_company.email.nil? %>
-            <td><%= @property.management_company.email %></td>
-          <% else %>
-            <td></td>
-          <% end %>
-        </tr>
-      <% else %>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <tr>
+      <th>会社名</th>
+      <td><%= @property.management_company.name if @property.management_company.present? %></td>
+    </tr>
+    <tr>
+      <th>部署</th>
+      <td><%= @property.management_company.department if @property.management_company.present? %></td>
+    </tr>
+    <tr>
+      <th>担当者</th>
+      <td><%= @property.management_company.sales_person if @property.management_company.present? %></td>
+    </tr>
+    <tr>
+      <th>電話番号</th>
+      <td><%= @property.management_company.telephone if @property.management_company.present? %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= @property.management_company.email if @property.management_company.present? %></td>
+    </tr>
   </table>
   <div class='' style="margin-top:100px;">
     <div class='d-flex'>
