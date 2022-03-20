@@ -26,7 +26,7 @@
   <div class='tables d-flex justify-content-around mt-4'>
     <div class='col-5'>
       <h5 class='mt-4 text-center table-title'>物件情報</h5>
-      <table class='property-table shadow'>
+      <table class='property-table'>
         <tr>
           <th>総戸数</th>
           <td><%= @property.total_units %>戸</td>
@@ -55,7 +55,7 @@
     </div>
     <div class='col-5'>
       <h5 class='mt-4 text-center table-title'>管理会社情報</h5>
-      <table class='company-table shadow'>
+      <table class='company-table'>
         <tr>
           <th>会社名</th>
           <td><%= @property.management_company.name if @property.management_company.present? %></td>
