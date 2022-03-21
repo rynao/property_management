@@ -30,6 +30,8 @@ ja:
       contract:
         rent: 家賃
         management_cost: 管理費
+        start_date: 契約開始日
+        end_date: 契約終了日
   activemodel:
     attributes:
       property_company:
