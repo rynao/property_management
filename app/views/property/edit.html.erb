@@ -13,6 +13,10 @@
           <div class='col-md-3'>
             <%= f.text_field :postal_code, class:'form-control', placeholder:'例：110-0001' %>
           </div>
+          <label class='col-md-2 form-label'>売却済み</label>
+          <div class='col-md-2'>
+            <%= f.check_box :sold, class:'form-check-input' %>
+          </div>
         </div>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>都道府県</label>
@@ -32,18 +36,22 @@
         </div>
         <div class='row mb-4'>
           <label class='col-md-2 form-label'>物件名称</label>
-          <div class='col-md-8'>
+          <div class='col-md-4'>
             <%= f.text_field :building, class:'form-control', placeholder:'例：谷中パークハイツ', required: true %>
+          </div>
+          <label class='col-md-2 form-label'>総戸数</label>
+          <div class='col-md-2'>
+            <%= f.number_field :total_units, class:'form-control', placeholder:'例：6' %>
           </div>
         </div>
         <div class='row mb-4'>
-          <label class='col-md-2 form-label'>総戸数</label>
-          <div class='col-md-3'>
-            <%= f.number_field :total_units, class:'form-control', placeholder:'例：6' %>
-          </div>
           <label class='col-md-2 form-label'>築年月</label>
           <div class='col-md-3'>
             <%= f.date_field :building_year, class:'form-control' %>
+          </div>
+          <label class='col-md-2 form-label'>購買年月</label>
+          <div class='col-md-3'>
+            <%= f.date_field :purchase_date, class:'form-control', required: true %>
           </div>
         </div>
         <div class='row mb-4'>

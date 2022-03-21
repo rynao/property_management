@@ -9,10 +9,12 @@ class PropertyCompany
     :building,
     :total_units,
     :building_year,
+    :purchase_date,
     :property_type,
     :business_entity,
     :land_area,
     :building_area,
+    :sold,
     :user_id,
     :name,
     :department,
@@ -27,6 +29,7 @@ class PropertyCompany
     validates :prefecture
     validates :city
     validates :building
+    validates :purchase_date
     validates :property_type
     validates :business_entity
     validates :user_id
@@ -52,10 +55,10 @@ class PropertyCompany
 
   def save
     if name.blank?
-      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id)
+      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, purchase_date: purchase_date, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, sold: sold, user_id: user_id)
     else
       management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
-      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, user_id: user_id, management_company_id: management.id)
+      Property.create(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, purchase_date: purchase_date, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, sold: sold, user_id: user_id, management_company_id: management.id)
     end
   end
 
@@ -64,16 +67,16 @@ class PropertyCompany
       management = ManagementCompany.find(management_company_id)
       management.update(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
       property = Property.find(property_id)
-      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, purchase_date: purchase_date, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, sold: sold, management_company_id: management.id)
     elsif management_company_id.present?
       management = ManagementCompany.find(management_company_id)
       management.destroy
       property = Property.find(property_id)
-      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: nil)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, purchase_date: purchase_date, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, sold: sold, management_company_id: nil)
     else
       management = ManagementCompany.create(name: name, department: department, sales_person: sales_person, telephone: telephone, email: email, user_id: user_id)
       property = Property.find(property_id)
-      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, management_company_id: management.id)
+      property.update(postal_code: postal_code, prefecture: prefecture, city: city, address_line: address_line, building: building,total_units: total_units, building_year: building_year, purchase_date: purchase_date, property_type:property_type, business_entity: business_entity, land_area: land_area, building_area: building_area, sold: sold, management_company_id: management.id)
     end
   end
 
@@ -92,10 +95,12 @@ class PropertyCompany
     building: @property.building,
     total_units: @property.total_units,
     building_year: @property.building_year,
+    purchase_date: @property.purchase_date,
     property_type: @property.property_type,
     business_entity: @property.business_entity,
     land_area: @property.land_area,
     building_area: @property.building_area,
+    sold: @property.sold,
     user_id: @property.user_id,
     }
   end
@@ -109,10 +114,12 @@ class PropertyCompany
     building: @property.building,
     total_units: @property.total_units,
     building_year: @property.building_year,
+    purchase_date: @property.purchase_date,
     property_type: @property.property_type,
     business_entity: @property.business_entity,
     land_area: @property.land_area,
     building_area: @property.building_area,
+    sold: @property.sold,
     user_id: @property.user_id,
     name: @property.management_company.name,
     department: @property.management_company.department,

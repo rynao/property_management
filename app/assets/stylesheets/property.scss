@@ -1,5 +1,5 @@
 .dounut-chart {
-  position: absolute;
+  position: relative;
   max-height: 400px;
   margin: auto 80px;
 }
@@ -57,22 +57,6 @@
   border-bottom: none;
 }
 
-.property-table tr:first-child th:first-child {
-  border-radius: 10px 0 0 0;
-}
-
-.property-table tr:first-child td:last-child {
-  border-radius: 0 10px 0 0;
-}
-
-.property-table tr:last-child th {
-  border-radius: 0 0 0 10px;
-}
-
-.property-table tr:last-child td {
-  border-radius: 0 0 10px 0px;
-}
-
 .company-table {
   width: 100%;
 }
@@ -100,20 +84,4 @@
 
 .company-table tr:last-child{
   border-bottom: none;
-}
-
-.company-table tr:first-child th:first-child {
-  border-radius: 10px 0 0 0;
-}
-
-.company-table tr:first-child td:last-child {
-  border-radius: 0 10px 0 0;
-}
-
-.company-table tr:last-child th:first-child {
-  border-radius: 0 0 0 10px;
-}
-
-.company-table tr:last-child td:last-child {
-  border-radius: 0 0 10px 0px;
 }

@@ -46,9 +46,22 @@
       <div>
         <h4 class='text-center bg-light p-2 m-3'>稼働状況</h4>
       </div>
-      <div class='px-5 py-4 dounut-chart mt-5'>
+      <div class='d-flex justify-content-center'>
+          <h5 class='px-5'>
+            <%= link_to summary_property_index_path(month:@month.prev_month) do %>
+              <i class="bi bi-chevron-double-left"></i>
+            <% end %>
+          </h5>
+          <h5><%= @month.strftime("%Y年%m月") %></h5>
+          <h5 class='px-5'>
+            <%= link_to summary_property_index_path(month:@month.next_month) do %>
+              <i class="bi bi-chevron-double-right"></i>
+            <% end %>
+          </h5>
+        </div>
+      <div class='px-5 py-3 dounut-chart'>
         <canvas id="vacancyChart"></canvas>
-        <p class='room-count'><%= @occupant_rooms.count %> / <%= Room.all.count%>戸</p>
+        <p class='room-count'><%= @occupant_rooms.count %> / <%= @target_rooms.count%>戸</p>
       </div>
     </div>
   </div>
