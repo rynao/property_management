@@ -18,6 +18,7 @@ ja:
         city: 市・区
         building: 物件名称
         total_units: 総戸数
+        purchase_date: 購入年月
         property_type: 物件種別
         business_entity: 所有者
         land_area: 土地面積
@@ -37,6 +38,7 @@ ja:
         city: 市・区
         building: 物件名称
         total_units: 総戸数
+        purchase_date: 購入年月
         property_type: 物件種別
         business_entity: 所有者
         land_area: 土地面積
