@@ -24,10 +24,12 @@ class PropertyController < ApplicationController
                             .where(not_paid:'1',user_id: current_user.id)
                             .count
 
-    # 稼働状況
+    # 月別稼働状況
     @month = params[:month] ? Date.parse(params[:month]) : Date.today
     @occupant_rooms = Room.joins(:contracts).where(user_id: current_user.id)
                           .where(Contract.arel_table[:end_date].gteq @month.end_of_month)
+                          .where(Contract.arel_table[:start_date].lteq @month.beginning_of_month)
+
     @target_rooms = Room.joins(:property).where(Property.arel_table[:purchase_date].lteq @month.end_of_month)
       gon.occupancy_rate = ((@occupant_rooms.count.to_f / @target_rooms.count.to_f)*100).round(2)
 
