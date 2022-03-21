@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_033501) do
+ActiveRecord::Schema.define(version: 2022_03_21_021214) do
 
   create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 2022_03_10_033501) do
     t.float "land_area"
     t.float "building_area"
     t.bigint "management_company_id"
+    t.date "purchase_date", null: false
+    t.boolean "sold"
     t.index ["management_company_id"], name: "index_properties_on_management_company_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end

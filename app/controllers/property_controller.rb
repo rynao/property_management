@@ -4,19 +4,19 @@ class PropertyController < ApplicationController
   def summary
     # 今月収入
     @monthly_income = Payment.joins(:contract, :user)
-                              .where(user_id: current_user.id, paid_date: Time.now.all_month, not_paid:'0')
+                              .where(user_id: current_user.id, paid_date: Date.today.all_month, not_paid:'0')
                               .sum('contracts.rent')
 
     # 契約更新対象
     @renew_contract = Contract.joins(:user)
                               .where(user_id: current_user.id)
-                              .where("end_date <= ?",Date.today + 90)
-                              .where("end_date >= ?",Date.today)
+                              .where("end_date <= ?", Date.today + 90)
+                              .where("end_date >= ?", Date.today)
                               .count
 
     # 今月未納
     @not_paid = Payment.joins(:user)
-                        .where(not_paid:'1',user_id: current_user.id, paid_date: Time.now.all_month)
+                        .where(not_paid:'1',user_id: current_user.id, paid_date: Date.today.all_month)
                         .count
 
     # 累計未納
@@ -25,13 +25,13 @@ class PropertyController < ApplicationController
                             .count
 
     # 稼働状況
+    @month = params[:month] ? Date.parse(params[:month]) : Date.today
     @occupant_rooms = Room.joins(:contracts).where(user_id: current_user.id)
-                          .where(Contract.arel_table[:end_date].gteq Date.today)
-
-      gon.occupancy_rate = ((@occupant_rooms.count.to_f / Room.all.count.to_f)*100).round(2)
+                          .where(Contract.arel_table[:end_date].gteq @month.end_of_month)
+    @target_rooms = Room.joins(:property).where(Property.arel_table[:purchase_date].lteq @month.end_of_month)
+      gon.occupancy_rate = ((@occupant_rooms.count.to_f / @target_rooms.count.to_f)*100).round(2)
 
     # 月別家賃
-    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     @month_payments = Payment.joins(:property, :user)
                               .where(user_id: current_user.id, paid_date: @month.all_month, not_paid:'0')
                               .group('building').sum('amounts')
@@ -129,6 +129,6 @@ class PropertyController < ApplicationController
   end
 
   def property_params
-    params.require(:property_company).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :property_type, :business_entity, :land_area, :building_area, :name, :department, :sales_person, :telephone, :email).merge(user_id: current_user.id, management_company_id: params[:management_company_id], property_id: params[:id])
+    params.require(:property_company).permit(:postal_code, :prefecture, :city, :address_line, :building, :total_units, :building_year, :purchase_date, :property_type, :business_entity, :land_area, :building_area, :sold, :name, :department, :sales_person, :telephone, :email).merge(user_id: current_user.id, management_company_id: params[:management_company_id], property_id: params[:id])
   end
 end
