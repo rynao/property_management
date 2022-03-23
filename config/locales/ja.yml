@@ -27,6 +27,11 @@ ja:
         name: 管理会社
         telephone: 電話番号
         email: メールアドレス
+      room:
+        name: 部屋番号
+        layout: 間取り
+        loom_size: 広さ
+        direction: 方角
       contract:
         rent: 家賃
         management_cost: 管理費
@@ -48,3 +53,9 @@ ja:
         name: 管理会社
         telephone: 電話番号
         email: メールアドレス
+      form:
+        room_collection:
+          name: 部屋番号
+          layout: 間取り
+          loom_size: 広さ
+          direction: 方角
