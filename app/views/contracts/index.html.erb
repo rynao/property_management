@@ -31,41 +31,62 @@
       <h4 style="margin-right: 40px;">契約一覧</h4>
       <%=link_to '契約登録', new_contract_path, class:'btn btn-primary' %>
     </div>
-    <table class='table  table-hover mt-3'>
-      <thead>
-        <tr>
-          <th>物件名称</th>
-          <th>部屋</th>
-          <th>契約開始月</th>
-          <th>契約終了月</th>
-          <th>家賃</th>
-          <th>管理費</th>
-          <th>契約者</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @contracts.each do |contract| %>
-          <tr>
-            <td><%= contract.property.building %></td>
-            <td><%= contract.room.name %></td>
-            <td><%= contract.start_date.strftime("%Y年%-m月%-d日") %></td>
-            <td><%= contract.end_date.strftime("%Y年%-m月%-d日") %></td>
-            <td><%= contract.rent.to_s(:currency, locale: 'jp') %></td>
-            <td><%= contract.management_cost.to_s(:currency, locale: 'jp') %></td>
-            <td><%= contract.contractor %></td>
-            <%# <td><%= link_to '詳細', contract_path(contract.id) %></td>
-            <td>
-              <%=link_to edit_contract_path(contract.id), class:'mx-3' do %>
-                <i class="bi bi-pencil-square" style="font-size: 22px; color: #666;"></i>
+    <div class="accordion" id="accordionExample">
+  <% @property_count.times do |i|%>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading<%= i %>">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">
+        <%= @property[i].building %>
+      </button>
+    </h2>
+    <div id="collapse<%= i %>" class="accordion-collapse collapse" aria-labelledby="heading<%= i %>">
+      <div class="accordion-body">
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>部屋</th>
+              <th>契約開始月</th>
+              <th>契約終了月</th>
+              <th>家賃</th>
+              <th>管理費</th>
+              <th>契約者</th>
+            </tr>
+          </thead>
+          <body>
+          <% @property[i].rooms.each do |room| %>
+            <tr>
+              <td><%= room.name %></td>
+              <% if room.contracts.exists? %>
+                <td><%= room.contracts.order(:end_date).last.start_date.strftime("%Y年%-m月%-d日") %></td>
+                <td><%= room.contracts.order(:end_date).last.end_date.strftime("%Y年%-m月%-d日") %></td>
+                <td><%= room.contracts.order(:end_date).last.rent.to_s(:currency, locale: 'jp') %></td>
+                <td><%= room.contracts.order(:end_date).last.management_cost.to_s(:currency, locale: 'jp') %></td>
+                <td><%= room.contracts.order(:end_date).last.contractor %></td>
+                <td>
+                  <%=link_to edit_contract_path(room.contracts.order(:end_date).last.id), class:'mx-3' do %>
+                  <i class="bi bi-pencil-square" style="font-size: 22px; color: #666;"></i>
+                  <% end %>
+                  <%=link_to contract_path(room.contracts.order(:end_date).last.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'' do %>
+                    <i class="bi bi-trash3" style="font-size: 22px; color: #666;"></i>
+                  <% end %>
+                </td>
+              <% else %>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               <% end %>
-              <%=link_to contract_path(contract.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:'' do %>
-                <i class="bi bi-trash3" style="font-size: 22px; color: #666;"></i>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </tr>
+          <% end %>
+          </body>
+        </table>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
   </div>
   <div class='card shadow row g-3 my-3 px-5 py-3'>
     <h5 class='py-2'>過去の契約一覧</h5>
@@ -106,4 +127,6 @@
     </table>
   </div>
 </div>
+<div class='container'>
 
+</div>

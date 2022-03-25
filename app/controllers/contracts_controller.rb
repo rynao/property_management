@@ -10,6 +10,8 @@ class ContractsController < ApplicationController
     @contracts = current_user.contracts.joins(:property, :room)
                               .where("end_date >= ?",Date.today)
                               .order(:building).order(:name)
+    @property = current_user.property.where(sold:nil).or(current_user.property.where(sold:0))
+    @property_count = current_user.property.where(sold:nil).or(current_user.property.where(sold:0)).count
 
     @old_contracts = current_user.contracts.joins(:property, :room)
                               .where("end_date < ?",Date.today)
